@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PAULANI Soluções Empresariais — Gestão inteligente para empresas que querem crescer</title>
+<meta name="description" content="A PAULANI integra consultoria, backoffice, tecnologia e direção financeira estratégica para desenvolver empresas mais organizadas, eficientes e preparadas para o futuro." />
+<meta name="theme-color" content="#0B1220" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="PAULANI Soluções Empresariais" />
+<meta property="og:description" content="Gestão inteligente para empresas que querem crescer. Um único parceiro, todas as soluções para o seu negócio." />
+
+<link rel="icon" href="./favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="./assets/favicon.png" />
+<link rel="preload" as="font" type="font/woff2" href="./assets/fonts/syncopate-700.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="./assets/fonts/inter.woff2" crossorigin />
+<link rel="preload" as="image" href="./assets/frames/f-001.jpg" fetchpriority="high" />
+
+<style>
+/* ════════════════════════════════════════════════════════════════════════
+   FONTES
+════════════════════════════════════════════════════════════════════════ */
+@font-face{font-family:'Syncopate';src:url('./assets/fonts/syncopate-700.woff2') format('woff2');font-weight:700;font-display:optional}
+@font-face{font-family:'Syncopate';src:url('./assets/fonts/syncopate-400.woff2') format('woff2');font-weight:400;font-display:optional}
+@font-face{font-family:'Inter';src:url('./assets/fonts/inter.woff2') format('woff2');font-weight:300 700;font-display:optional}
+
+/* ════════════════════════════════════════════════════════════════════════
+   PALETA PAULANI
+════════════════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#0B1220;
+  --ink-deep:#060B15;
+  --ink-soft:#131C2E;
+  --navy:#051F51;
+  --navy-mid:#0A3B8C;
+  --blue-glow:#2E9BFF;
+  --blue-soft:#8CC7FF;
+  --bone:#FFFFFF;
+  --bone-soft:rgba(255,255,255,0.72);
+  --bone-mute:rgba(255,255,255,0.45);
+  --line:rgba(255,255,255,0.08);
+  --line-blue:rgba(46,155,255,0.20);
+
+  --font-h:'Syncopate', sans-serif;
+  --font-b:'Inter', sans-serif;
+
+  --r-pill:999px;
+  --r-md:14px;
+  --r-lg:24px;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   RESET
+════════════════════════════════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  background:var(--ink);color:var(--bone);
+  font-family:var(--font-b);font-weight:300;line-height:1.6;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;
+}
+::selection{background:var(--blue-glow);color:var(--ink-deep)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--ink-deep)}
+::-webkit-scrollbar-thumb{background:rgba(46,155,255,0.28);border-radius:var(--r-pill)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit;border:0;background:none;cursor:none;color:inherit}
+input,select,textarea{font-family:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--font-h);color:var(--bone);text-transform:uppercase;line-height:1.02;letter-spacing:-1.2px;font-weight:700}
+ul{list-style:none}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CURSOR
+════════════════════════════════════════════════════════════════════════ */
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cursor-dot{width:6px;height:6px;background:var(--blue-glow);border-radius:50%;box-shadow:0 0 12px var(--blue-glow);transition:transform .2s var(--ease),background .2s}
+.cursor-ring{width:36px;height:36px;border:1.4px solid rgba(46,155,255,0.7);border-radius:50%;transition:width .35s var(--ease),height .35s var(--ease),border-color .3s}
+.cursor-ring.is-active{width:72px;height:72px;border-color:var(--blue-glow)}
+@media (pointer:coarse){
+  .cursor-dot,.cursor-ring{display:none}
+  body,button,input,select,a{cursor:auto}
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   AMBIENTE
+════════════════════════════════════════════════════════════════════════ */
+.amb{position:fixed;inset:0;z-index:-20;overflow:hidden;pointer-events:none}
+.amb::before,.amb::after{content:'';position:absolute;border-radius:50%;filter:blur(120px);opacity:.55;will-change:transform}
+.amb::before{
+  top:-15%;left:-12%;width:60vw;height:60vw;
+  background:radial-gradient(circle,rgba(5,31,81,.85),transparent 70%);
+  animation:ambDrift1 32s ease-in-out infinite alternate;
+}
+.amb::after{
+  bottom:-20%;right:-12%;width:55vw;height:55vw;
+  background:radial-gradient(circle,rgba(46,155,255,.09),transparent 70%);
+  animation:ambDrift2 38s ease-in-out infinite alternate;
+}
+@keyframes ambDrift1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(8vw,6vh) scale(1.08)}}
+@keyframes ambDrift2{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-6vw,-4vh) scale(.94)}}
+
+.amb-grid{
+  position:fixed;inset:0;z-index:-19;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.028) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 0%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 0%,transparent 75%);
+}
+.amb-noise{
+  position:fixed;inset:0;z-index:-18;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   LOADER
+════════════════════════════════════════════════════════════════════════ */
+.loader{
+  position:fixed;inset:0;z-index:9000;background:var(--ink-deep);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;
+  transition:opacity .8s var(--ease),visibility .8s;
+}
+.loader.is-done{opacity:0;visibility:hidden}
+.loader__word{
+  font-family:var(--font-h);font-weight:700;
+  font-size:clamp(1.6rem,5.2vw,4.2rem);
+  color:var(--bone);line-height:1;letter-spacing:.18em;
+  display:flex;
+}
+.loader__word span{
+  display:inline-block;opacity:0;transform:translateY(18px);
+  animation:loaderTick .6s var(--ease) forwards;
+}
+.loader__word span:nth-child(1){animation-delay:.05s}
+.loader__word span:nth-child(2){animation-delay:.16s}
+.loader__word span:nth-child(3){animation-delay:.27s}
+.loader__word span:nth-child(4){animation-delay:.38s}
+.loader__word span:nth-child(5){animation-delay:.49s}
+.loader__word span:nth-child(6){animation-delay:.60s}
+.loader__word span:nth-child(7){animation-delay:.71s;color:var(--blue-glow);text-shadow:0 0 30px var(--blue-glow)}
+@keyframes loaderTick{
+  0%{opacity:0;transform:translateY(18px)}
+  60%{opacity:1;transform:translateY(-2px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+.loader__tag{
+  font-family:var(--font-h);font-weight:400;font-size:.62rem;letter-spacing:.46em;
+  color:var(--bone-mute);text-transform:uppercase;
+  opacity:0;animation:loaderTick .7s var(--ease) .95s forwards;
+}
+.loader__line{
+  position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--blue-glow);
+  box-shadow:0 0 16px var(--blue-glow);animation:loaderLine 2s var(--ease) forwards;
+}
+@keyframes loaderLine{to{width:100%}}
+
+/* ════════════════════════════════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem clamp(1.2rem,3vw,2.5rem);
+  background:linear-gradient(180deg,rgba(11,18,32,0.85),rgba(11,18,32,0));
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .4s var(--ease),padding .4s var(--ease),border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.is-scrolled{padding-top:.7rem;padding-bottom:.7rem;background:rgba(6,11,21,0.9);border-bottom-color:var(--line-blue)}
+.nav__logo{display:inline-flex;align-items:center;height:30px}
+.nav__logo img{height:100%;width:auto;display:block;transition:transform .3s var(--ease)}
+.nav__logo:hover img{transform:scale(1.04)}
+.nav.is-scrolled .nav__logo{height:24px}
+.nav__cta{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.7rem 1.2rem;border-radius:var(--r-pill);
+  background:var(--blue-glow);color:var(--ink-deep);
+  font-family:var(--font-b);font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  box-shadow:0 8px 24px rgba(46,155,255,.25);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.nav__cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(46,155,255,.4)}
+
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;
+  background:linear-gradient(90deg,var(--navy-mid),var(--blue-glow));
+  transform:scaleX(0);transform-origin:left;z-index:101;transition:transform .1s linear;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════════════════════════ */
+.hero{position:relative;width:100%;height:400vh;z-index:2}
+.hero__sticky{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;isolation:isolate}
+.hero__canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:.9}
+.hero__sticky::before{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(6,11,21,.6) 0%,rgba(6,11,21,.18) 30%,rgba(6,11,21,.55) 70%,rgba(6,11,21,.95) 100%),
+    radial-gradient(ellipse 80% 80% at 50% 50%,transparent 30%,rgba(11,18,32,.5) 100%);
+}
+.hero__sticky::after{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(135deg,rgba(5,31,81,.28) 0%,transparent 35%,transparent 65%,rgba(5,31,81,.28) 100%);
+  mix-blend-mode:screen;
+}
+.hero__content{
+  position:absolute;inset:0;z-index:5;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:0 clamp(1.2rem,4vw,3rem);
+}
+.hero__title{
+  font-family:var(--font-h);font-weight:700;
+  font-size:clamp(2.2rem,6.6vw,7rem);
+  line-height:.94;letter-spacing:-2px;text-transform:uppercase;color:var(--bone);
+  text-shadow:0 4px 40px rgba(0,0,0,.6);max-width:16ch;
+}
+.hero__title em{
+  font-style:normal;padding-block:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(135deg,var(--blue-glow) 0%,#a9d9ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 28px rgba(46,155,255,.45));
+}
+.hero__sub{
+  font-family:var(--font-b);font-size:clamp(.95rem,1.3vw,1.18rem);
+  color:var(--bone-soft);max-width:58ch;line-height:1.6;margin-top:1.5rem;font-weight:300;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-top:2.2rem}
+.hero__bottom{
+  position:absolute;left:0;right:0;bottom:1.6rem;z-index:5;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 clamp(1.2rem,4vw,3rem);
+  font-family:var(--font-h);font-size:.66rem;letter-spacing:.3em;
+  color:var(--bone-mute);text-transform:uppercase;
+}
+.hero__bottom-cell{display:flex;flex-direction:column;gap:.3rem;max-width:15ch}
+.hero__bottom-cell strong{font-family:var(--font-h);font-size:1.5rem;color:var(--bone);letter-spacing:-1px}
+.hero__bottom .scroll-cue{display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--blue-glow)}
+.hero__bottom .scroll-cue::after{
+  content:'';width:1px;height:32px;background:linear-gradient(var(--blue-glow),transparent);
+  animation:scrollPulse 1.6s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero__phase{transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.hero__phase.is-out{opacity:0;transform:translateY(-12px)}
+
+/* ════════════════════════════════════════════════════════════════════════
+   BOTÕES
+════════════════════════════════════════════════════════════════════════ */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.8rem;
+  padding:1.1rem 2.1rem;border-radius:var(--r-pill);
+  background:var(--blue-glow);color:var(--ink-deep);
+  font-family:var(--font-h);font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  box-shadow:0 12px 40px rgba(46,155,255,.35);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 50px rgba(46,155,255,.55)}
+.btn-primary svg{width:18px;height:14px;flex:none}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:1.1rem 1.9rem;border-radius:var(--r-pill);
+  border:1px solid var(--line-blue);background:rgba(46,155,255,.05);
+  color:var(--bone);backdrop-filter:blur(4px);
+  font-family:var(--font-h);font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  transition:border-color .3s var(--ease),background .3s var(--ease),transform .3s var(--ease);
+}
+.btn-ghost:hover{border-color:var(--blue-glow);background:rgba(46,155,255,.12);transform:translateY(-2px)}
+
+/* ════════════════════════════════════════════════════════════════════════
+   SECTION BASE
+════════════════════════════════════════════════════════════════════════ */
+.section{position:relative;padding:clamp(5rem,12vh,9rem) clamp(1.2rem,4vw,3rem);z-index:2}
+.section__inner{max-width:1280px;margin:0 auto}
+.section__head{display:flex;flex-direction:column;gap:1rem;max-width:780px;margin-bottom:3rem;align-items:flex-start;text-align:left}
+.section__head.center{margin:0 auto 3rem;text-align:center;align-items:center}
+.section__title{
+  font-family:var(--font-h);font-weight:700;
+  font-size:clamp(1.9rem,4.4vw,3.9rem);
+  line-height:1;letter-spacing:-1.6px;text-transform:uppercase;
+}
+.section__title em{
+  font-style:normal;padding-block:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(135deg,var(--blue-glow) 0%,#a9d9ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section__sub{
+  font-family:var(--font-b);font-size:clamp(1rem,1.2vw,1.1rem);
+  color:var(--bone-soft);font-weight:300;line-height:1.65;max-width:62ch;
+}
+.reveal{opacity:0;transform:translateY(28px) scale(.99);filter:blur(6px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter .8s var(--ease)}
+.reveal.is-visible{opacity:1;transform:none;filter:blur(0)}
+
+/* ════════════════════════════════════════════════════════════════════════
+   MARQUEE
+════════════════════════════════════════════════════════════════════════ */
+.marquee{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--ink-deep);padding:1.2rem 0}
+.marquee__track{display:flex;gap:3rem;width:max-content;animation:marqueeRun 42s linear infinite;white-space:nowrap}
+.marquee span{font-family:var(--font-h);font-size:.92rem;letter-spacing:.32em;text-transform:uppercase;color:var(--bone);display:inline-flex;align-items:center;gap:1.6rem}
+.marquee span::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue-glow);box-shadow:0 0 10px var(--blue-glow)}
+@keyframes marqueeRun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ════════════════════════════════════════════════════════════════════════
+   ZOOM REVEAL
+════════════════════════════════════════════════════════════════════════ */
+.zoom-reveal{position:relative;margin-top:-100vh;z-index:5;clip-path:inset(50% 50% 50% 50%);background:var(--ink);will-change:clip-path}
+
+/* ════════════════════════════════════════════════════════════════════════
+   MANIFESTO / DORES
+════════════════════════════════════════════════════════════════════════ */
+.manifesto__big{
+  font-family:var(--font-h);font-weight:700;
+  font-size:clamp(1.7rem,4.2vw,3.6rem);
+  line-height:1.06;letter-spacing:-1.4px;text-transform:uppercase;max-width:24ch;
+}
+.manifesto__big em{font-style:normal;color:var(--blue-glow)}
+.manifesto__big s{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.35);color:var(--bone-mute)}
+.manifesto__lede{font-family:var(--font-b);font-size:1.05rem;color:var(--bone-soft);line-height:1.7;max-width:56ch;margin-top:1.6rem;font-weight:300}
+.manifesto__close{
+  font-family:var(--font-h);font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--blue-glow);margin-top:2rem;display:inline-flex;align-items:center;gap:.8rem;
+}
+.manifesto__close::before{content:'';width:44px;height:1px;background:var(--blue-glow);box-shadow:0 0 10px var(--blue-glow)}
+
+.float-words{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float-word{
+  position:absolute;font-family:var(--font-h);font-weight:400;text-transform:uppercase;
+  letter-spacing:.08em;color:rgba(255,255,255,.04);
+  font-size:clamp(1.6rem,4vw,4rem);white-space:nowrap;
+  animation:floatDrift 22s ease-in-out infinite alternate;
+}
+.float-word:nth-child(1){top:6%;left:-3%;animation-delay:0s}
+.float-word:nth-child(2){top:32%;right:-4%;animation-delay:-7s}
+.float-word:nth-child(3){bottom:22%;left:4%;animation-delay:-14s}
+.float-word:nth-child(4){top:58%;right:10%;animation-delay:-4s;font-size:clamp(1.2rem,2.6vw,2.4rem)}
+.float-word:nth-child(5){top:18%;left:34%;animation-delay:-10s;font-size:clamp(1.2rem,2.6vw,2.4rem)}
+.float-word:nth-child(6){bottom:8%;right:22%;animation-delay:-17s;font-size:clamp(1.2rem,2.6vw,2.4rem)}
+@keyframes floatDrift{0%{transform:translate(0,0)}100%{transform:translate(20px,-16px)}}
+
+/* ════════════════════════════════════════════════════════════════════════
+   MÉTODO — 4 ETAPAS
+════════════════════════════════════════════════════════════════════════ */
+.method__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.4vw,2.2rem);position:relative;margin-top:1rem}
+.method__rail{position:absolute;top:22px;left:6%;right:6%;height:1px;background:var(--line);overflow:hidden}
+.method__rail::after{
+  content:'';position:absolute;inset:0;transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,var(--navy-mid),var(--blue-glow));
+  box-shadow:0 0 12px rgba(46,155,255,.6);
+  transition:transform 2.2s var(--ease);
+}
+.method__grid.is-visible .method__rail::after{transform:scaleX(1)}
+.step{position:relative;display:flex;flex-direction:column;gap:.9rem;padding-top:0}
+.step__dot{
+  width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;flex:none;
+  background:var(--ink-deep);border:1px solid var(--line-blue);
+  font-family:var(--font-h);font-weight:700;font-size:.86rem;color:var(--bone-mute);
+  position:relative;z-index:2;
+  transition:border-color .5s var(--ease),color .5s var(--ease),box-shadow .5s var(--ease),background .5s var(--ease);
+}
+.method__grid.is-visible .step__dot{border-color:var(--blue-glow);color:var(--blue-glow);box-shadow:0 0 22px rgba(46,155,255,.35);background:rgba(46,155,255,.06)}
+.method__grid.is-visible .step:nth-child(2) .step__dot{transition-delay:.45s}
+.method__grid.is-visible .step:nth-child(3) .step__dot{transition-delay:.9s}
+.method__grid.is-visible .step:nth-child(4) .step__dot{transition-delay:1.35s}
+.method__grid.is-visible .step:nth-child(5) .step__dot{transition-delay:1.8s}
+.step__name{font-family:var(--font-h);font-weight:700;font-size:clamp(1rem,1.5vw,1.35rem);text-transform:uppercase;letter-spacing:-.4px;color:var(--bone)}
+.step__text{font-size:.92rem;color:var(--bone-soft);line-height:1.6;font-weight:300;max-width:30ch}
+
+/* ════════════════════════════════════════════════════════════════════════
+   STACK — 4 PILARES
+════════════════════════════════════════════════════════════════════════ */
+.stages-section{padding-bottom:0}
+.stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.stages-title{position:sticky;top:14vh;align-self:start;display:flex;flex-direction:column;gap:1rem;max-width:520px}
+.stages-title .section__title{font-size:clamp(1.8rem,4vw,3.4rem)}
+.stack-cards{position:relative;display:flex;flex-direction:column;gap:0;padding-bottom:14vh}
+.stack-card{
+  position:sticky;margin:0 0 4vh;padding:clamp(1.4rem,2.2vw,2rem);
+  background:linear-gradient(135deg,rgba(5,31,81,.94) 0%,rgba(4,20,52,.96) 60%,rgba(6,11,21,.96) 100%);
+  border:1px solid var(--line-blue);border-radius:22px;
+  display:flex;flex-direction:column;gap:1.2rem;
+  isolation:isolate;overflow:hidden;
+  box-shadow:0 24px 48px rgba(0,0,0,.55), 0 0 40px rgba(46,155,255,.07);
+}
+.stack-card::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 70% at 90% 100%,rgba(46,155,255,.18),transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 0%,rgba(46,155,255,.09),transparent 60%);
+}
+.stack-card > *{position:relative;z-index:2}
+.stack-card[data-step="01"]{top:14vh}
+.stack-card[data-step="02"]{top:17vh}
+.stack-card[data-step="03"]{top:20vh}
+.stack-card[data-step="04"]{top:23vh;margin-bottom:0}
+.stack-card__copy{display:flex;flex-direction:column;gap:.7rem}
+.stack-card__num{
+  font-family:var(--font-h);font-size:clamp(1.8rem,3vw,2.6rem);line-height:1;padding-block:.12em;
+  background:linear-gradient(180deg,var(--blue-glow),#1f7ed6 70%,var(--navy));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-2px;font-weight:700;
+}
+.stack-card__lead{font-size:.98rem;color:var(--bone);line-height:1.5;font-weight:400}
+.stack-card__title{font-family:var(--font-h);font-weight:700;font-size:clamp(1.05rem,1.75vw,1.6rem);line-height:1.14;letter-spacing:-.5px;text-transform:uppercase;color:var(--bone)}
+.stack-card__title em{font-style:normal;color:var(--blue-glow);text-shadow:0 0 18px rgba(46,155,255,.3)}
+.stack-card__text{font-size:.9rem;color:var(--bone-soft);line-height:1.6;font-weight:300}
+.stack-card__list{display:flex;flex-wrap:wrap;gap:.4rem}
+.stack-card__list li{
+  font-size:.72rem;letter-spacing:.02em;color:var(--bone-soft);
+  padding:.34rem .7rem;border:1px solid var(--line);border-radius:var(--r-pill);
+  background:rgba(255,255,255,.03);
+}
+
+.stack-card__viz{
+  position:relative;width:100%;aspect-ratio:16/8;
+  background:rgba(6,11,21,.55);border:1px solid var(--line-blue);border-radius:14px;
+  display:grid;place-items:center;overflow:hidden;isolation:isolate;
+  padding:clamp(1rem,2vw,1.6rem);
+}
+.stack-card__viz::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(46,155,255,.15),transparent 65%)}
+.stack-card__viz > *{position:relative;z-index:2;width:100%}
+
+/* viz 01 — medidor de maturidade */
+.viz-gauge{display:flex;align-items:center;justify-content:center;gap:clamp(1rem,3vw,2.4rem)}
+.viz-gauge__dial{
+  width:clamp(88px,11vw,124px);aspect-ratio:1;border-radius:50%;flex:none;
+  background:conic-gradient(var(--blue-glow) 0turn, var(--blue-glow) .68turn, rgba(255,255,255,.07) .68turn);
+  display:grid;place-items:center;
+  animation:gaugeSweep 4.5s var(--ease) infinite alternate;
+  box-shadow:0 0 30px rgba(46,155,255,.18);
+}
+@keyframes gaugeSweep{
+  0%{background:conic-gradient(var(--blue-glow) 0turn,var(--blue-glow) .22turn,rgba(255,255,255,.07) .22turn)}
+  100%{background:conic-gradient(var(--blue-glow) 0turn,var(--blue-glow) .78turn,rgba(255,255,255,.07) .78turn)}
+}
+.viz-gauge__dial::after{
+  content:'';width:74%;height:74%;border-radius:50%;background:#08111f;
+  border:1px solid var(--line-blue);
+}
+.viz-gauge__legend{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.viz-gauge__legend div{display:flex;align-items:center;gap:.6rem;font-family:var(--font-h);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-mute)}
+.viz-gauge__legend i{width:8px;height:8px;border-radius:2px;background:var(--blue-glow);flex:none;box-shadow:0 0 8px var(--blue-glow)}
+.viz-gauge__legend div:nth-child(2) i{background:rgba(255,255,255,.2);box-shadow:none}
+.viz-gauge__legend div:nth-child(3) i{background:rgba(255,255,255,.12);box-shadow:none}
+
+/* viz 02 — módulos de backoffice acendendo */
+.viz-mods{display:flex;flex-direction:column;gap:.5rem}
+.viz-mods div{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.46rem .8rem;border:1px solid var(--line);border-radius:8px;
+  background:rgba(6,11,21,.6);
+  font-family:var(--font-h);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-mute);
+  animation:modOn 5s ease-in-out infinite;
+}
+.viz-mods div::before{
+  content:'';width:12px;height:12px;border-radius:3px;flex:none;
+  border:1px solid var(--line-blue);background:transparent;
+  animation:modCheck 5s ease-in-out infinite;
+}
+.viz-mods div:nth-child(1),.viz-mods div:nth-child(1)::before{animation-delay:0s}
+.viz-mods div:nth-child(2),.viz-mods div:nth-child(2)::before{animation-delay:.5s}
+.viz-mods div:nth-child(3),.viz-mods div:nth-child(3)::before{animation-delay:1s}
+.viz-mods div:nth-child(4),.viz-mods div:nth-child(4)::before{animation-delay:1.5s}
+.viz-mods div:nth-child(5),.viz-mods div:nth-child(5)::before{animation-delay:2s}
+@keyframes modOn{0%,12%{color:var(--bone-mute);border-color:var(--line)}26%,88%{color:var(--bone);border-color:var(--line-blue)}100%{color:var(--bone-mute);border-color:var(--line)}}
+@keyframes modCheck{0%,12%{background:transparent;box-shadow:none}26%,88%{background:var(--blue-glow);box-shadow:0 0 10px var(--blue-glow)}100%{background:transparent;box-shadow:none}}
+
+/* viz 03 — nós integrados */
+.viz-net{position:relative;width:100%;height:100%;min-height:120px}
+.viz-net svg{width:100%;height:100%;overflow:visible}
+.viz-net .net-link{stroke:rgba(46,155,255,.35);stroke-width:1.2;stroke-dasharray:5 7;animation:netFlow 2.4s linear infinite}
+@keyframes netFlow{to{stroke-dashoffset:-24}}
+.viz-net .net-node{fill:#08111f;stroke:var(--blue-glow);stroke-width:1.6}
+.viz-net .net-core{fill:var(--blue-glow)}
+.viz-net .net-pulse{fill:var(--blue-glow);animation:netPulse 2.6s ease-in-out infinite}
+@keyframes netPulse{0%,100%{opacity:.25;r:4}50%{opacity:1;r:6}}
+
+/* viz 04 — dashboard executivo */
+.viz-dash{display:flex;flex-direction:column;gap:.55rem;width:100%}
+.viz-dash div{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.52rem .85rem;background:rgba(6,11,21,.6);border:1px solid var(--line-blue);border-radius:6px;
+  font-family:var(--font-h);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+}
+.viz-dash div span:first-child{color:var(--bone-mute)}
+.viz-dash div span:last-child{color:var(--blue-glow);font-size:.82rem;letter-spacing:-.3px}
+.viz-dash__spark{display:flex;align-items:flex-end;gap:3px;height:26px}
+.viz-dash__spark i{display:block;width:5px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,var(--blue-glow),var(--navy-mid));animation:barRise 2.6s ease-in-out infinite}
+.viz-dash__spark i:nth-child(1){height:38%}
+.viz-dash__spark i:nth-child(2){height:58%;animation-delay:.1s}
+.viz-dash__spark i:nth-child(3){height:46%;animation-delay:.2s}
+.viz-dash__spark i:nth-child(4){height:72%;animation-delay:.3s}
+.viz-dash__spark i:nth-child(5){height:64%;animation-delay:.4s}
+.viz-dash__spark i:nth-child(6){height:88%;animation-delay:.5s}
+.viz-dash__spark i:nth-child(7){height:100%;animation-delay:.6s}
+@keyframes barRise{0%,100%{transform:scaleY(.9);transform-origin:bottom}50%{transform:scaleY(1.04);transform-origin:bottom}}
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÓRBITA — UM ÚNICO PARCEIRO
+════════════════════════════════════════════════════════════════════════ */
+.orbit{position:relative;padding:clamp(5rem,12vh,10rem) 1.2rem;overflow:hidden}
+.orbit__layout{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2rem,5vw,5rem);align-items:center;margin-bottom:clamp(3rem,6vh,5rem)}
+.orbit__head{display:flex;flex-direction:column;gap:1.2rem;text-align:left;align-items:flex-start;max-width:560px}
+.orbit__head .section__title{font-size:clamp(1.7rem,3.4vw,2.9rem)}
+.orbit__stage{position:relative;width:100%;aspect-ratio:900/560;display:grid;place-items:center}
+.orbit__svg-wrap{position:relative;width:100%;height:100%;filter:drop-shadow(0 0 50px rgba(46,155,255,.22))}
+.orbit__svg{width:100%;height:100%;display:block;overflow:visible}
+.orbit__path{fill:none;stroke:var(--line-blue);stroke-width:1.2}
+.orbit__path--outer{stroke:rgba(46,155,255,.30)}
+.orbit__core{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:clamp(132px,21%,186px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 38%,rgba(14,74,168,.95),rgba(6,11,21,.98) 72%);
+  border:1px solid rgba(46,155,255,.4);
+  display:grid;place-items:center;
+  box-shadow:0 0 60px rgba(46,155,255,.25), inset 0 0 30px rgba(46,155,255,.12);
+}
+.orbit__core img{width:70%;height:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,.75))}
+.orbit__core::after{
+  content:'';position:absolute;inset:-10%;border-radius:50%;
+  border:1px solid rgba(46,155,255,.18);
+  animation:corePulse 3.6s ease-in-out infinite;
+}
+@keyframes corePulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.08);opacity:.2}}
+.sat__bg{fill:#08111f;stroke:var(--blue-glow);stroke-width:1.8;filter:drop-shadow(0 0 8px rgba(46,155,255,.55))}
+.sat__lbl{font-family:'Syncopate',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;fill:#fff;text-anchor:middle;text-transform:uppercase}
+.sat__ico{font-family:'Syncopate',sans-serif;font-weight:700;font-size:13px;fill:var(--blue-glow);text-anchor:middle}
+.tool__bg{fill:#08111f;stroke:rgba(46,155,255,.55);stroke-width:1.2}
+.tool__lbl{font-family:'Syncopate',sans-serif;font-weight:700;font-size:9px;letter-spacing:.12em;fill:rgba(255,255,255,.8);text-anchor:middle}
+
+/* ════════════════════════════════════════════════════════════════════════
+   STATS
+════════════════════════════════════════════════════════════════════════ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,2rem);margin-top:3rem}
+.stat{text-align:center;padding:2rem 1rem;border:1px solid var(--line);border-radius:var(--r-md);background:linear-gradient(180deg,rgba(19,28,46,.6),rgba(6,11,21,.6))}
+.stat__num{
+  font-family:var(--font-h);font-weight:700;font-size:clamp(1.5rem,3vw,2.6rem);padding-block:.1em;
+  background:linear-gradient(180deg,var(--blue-glow),var(--navy-mid));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-1.5px;line-height:1;
+}
+.stat__num{text-transform:uppercase}
+.stat__lbl{font-family:var(--font-h);font-size:.64rem;letter-spacing:.28em;color:var(--bone-mute);text-transform:uppercase;margin-top:.7rem;line-height:1.5}
+
+/* ════════════════════════════════════════════════════════════════════════
+   VALOR + PARA QUEM
+════════════════════════════════════════════════════════════════════════ */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,1.8vw,1.6rem)}
+.card{
+  padding:clamp(1.3rem,2vw,1.8rem);border:1px solid var(--line);border-radius:var(--r-md);
+  background:linear-gradient(180deg,rgba(19,28,46,.55),rgba(6,11,21,.7));
+  display:flex;flex-direction:column;gap:.8rem;
+  transition:border-color .4s var(--ease),transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.card:hover{border-color:var(--line-blue);transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.card__ico{
+  width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;
+  border:1px solid var(--line-blue);background:rgba(46,155,255,.07);color:var(--blue-glow);
+}
+.card__ico svg{width:19px;height:19px}
+.card h3{font-family:var(--font-h);font-weight:700;font-size:.92rem;letter-spacing:-.2px;text-transform:uppercase;line-height:1.25}
+.card p{font-size:.88rem;color:var(--bone-soft);line-height:1.6;font-weight:300}
+
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
+.chips span{
+  font-family:var(--font-h);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-soft);
+  padding:.6rem 1rem;border:1px solid var(--line);border-radius:var(--r-pill);background:rgba(255,255,255,.03);
+  transition:border-color .3s var(--ease),color .3s var(--ease);
+}
+.chips span:hover{border-color:var(--line-blue);color:var(--bone)}
+
+/* ════════════════════════════════════════════════════════════════════════
+   MANIFESTO FINAL
+════════════════════════════════════════════════════════════════════════ */
+.creed{
+  border:1px solid var(--line-blue);border-radius:var(--r-lg);
+  background:linear-gradient(150deg,rgba(5,31,81,.55) 0%,rgba(6,11,21,.85) 60%);
+  padding:clamp(2rem,5vw,4rem);
+  position:relative;overflow:hidden;
+}
+.creed::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 90% at 90% 0%,rgba(46,155,255,.14),transparent 60%)}
+.creed > *{position:relative;z-index:2}
+.creed h2{font-size:clamp(1.7rem,4vw,3.4rem);line-height:1.04;max-width:20ch}
+.creed h2 em{font-style:normal;padding-block:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone;background:linear-gradient(135deg,var(--blue-glow),#a9d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.creed p{color:var(--bone-soft);line-height:1.75;max-width:62ch;margin-top:1.3rem;font-size:1.02rem}
+.creed .chips{margin-top:2rem}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CTA + FORM
+════════════════════════════════════════════════════════════════════════ */
+.cta{text-align:center;padding:clamp(5rem,12vh,9rem) 1.2rem;background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(46,155,255,.09),transparent 70%)}
+.cta h2{font-family:var(--font-h);font-weight:700;font-size:clamp(1.7rem,4vw,3.5rem);line-height:1.02;letter-spacing:-1.2px;text-transform:uppercase;max-width:22ch;margin:0 auto}
+.cta h2 em{font-style:normal;padding-block:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone;background:linear-gradient(135deg,var(--blue-glow),#a9d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta > p{margin:1.4rem auto 2.4rem;max-width:56ch;color:var(--bone-soft);font-size:1.05rem}
+
+.form{
+  max-width:760px;margin:3rem auto 0;padding:clamp(2rem,4vw,3rem);
+  background:linear-gradient(180deg,rgba(19,28,46,.85),rgba(6,11,21,.95));
+  border:1px solid var(--line-blue);border-radius:var(--r-lg);
+  backdrop-filter:blur(8px);text-align:left;
+}
+.form__head{text-align:center;margin-bottom:2rem}
+.form__head h3{font-family:var(--font-h);font-size:clamp(1.2rem,2.4vw,2rem);text-transform:uppercase;letter-spacing:-.5px}
+.form__head p{margin-top:.6rem;color:var(--bone-soft);font-size:.95rem}
+.form__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.form__fld{display:flex;flex-direction:column;gap:.4rem}
+.form__fld.full{grid-column:1 / -1}
+.form__fld label{font-family:var(--font-h);font-size:.62rem;letter-spacing:.3em;color:var(--bone-mute);text-transform:uppercase}
+.form__fld input,.form__fld select{
+  padding:.85rem 1rem;background:rgba(6,11,21,.7);border:1px solid var(--line);border-radius:8px;
+  color:var(--bone);font-size:.95rem;font-family:var(--font-b);
+  transition:border-color .25s var(--ease),background .25s var(--ease);
+}
+.form__fld input:focus,.form__fld select:focus{outline:none;border-color:var(--blue-glow);background:rgba(46,155,255,.05)}
+.form__submit{
+  width:100%;margin-top:1.4rem;padding:1.1rem;
+  background:var(--blue-glow);color:var(--ink-deep);
+  font-family:var(--font-h);font-weight:700;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;
+  border-radius:var(--r-pill);box-shadow:0 8px 28px rgba(46,155,255,.3);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.form__submit:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(46,155,255,.5)}
+.form__thanks{display:none;text-align:center;padding:2rem 1rem}
+.form__thanks h4{font-family:var(--font-h);font-size:1.3rem;color:var(--blue-glow);margin-bottom:.6rem}
+.form__note{margin-top:1rem;text-align:center;font-size:.7rem;color:var(--bone-mute);letter-spacing:.16em;text-transform:uppercase;font-family:var(--font-h)}
+.form.is-sent .form__head,.form.is-sent .form__grid,.form.is-sent .form__submit{display:none}
+.form.is-sent .form__thanks{display:block}
+
+/* ════════════════════════════════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════════════════════════════════ */
+.footer{border-top:1px solid var(--line);padding:3.5rem 1.2rem 2rem;text-align:center}
+.footer__logo{height:44px;width:auto;margin:0 auto 1.6rem;display:block}
+.footer__nav{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:center;margin-bottom:1.4rem}
+.footer__nav a{font-family:var(--font-h);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-soft);transition:color .3s var(--ease)}
+.footer__nav a:hover{color:var(--blue-glow)}
+.footer__contact{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin-bottom:2rem;font-size:.85rem;color:var(--bone-soft)}
+.footer__contact a{display:inline-flex;align-items:center;gap:.5rem;transition:color .3s var(--ease)}
+.footer__contact a:hover{color:var(--blue-glow)}
+.footer__contact svg{width:15px;height:15px;flex:none;opacity:.7}
+.footer__base{font-family:var(--font-h);font-size:.62rem;letter-spacing:.24em;color:var(--bone-mute);text-transform:uppercase;line-height:2}
+.footer__base span{color:var(--blue-glow)}
+
+/* ════════════════════════════════════════════════════════════════════════
+   RESPONSIVO
+════════════════════════════════════════════════════════════════════════ */
+@media (max-width:1024px){
+  .cards-grid{grid-template-columns:repeat(2,1fr)}
+  .method__grid{grid-template-columns:repeat(2,1fr);gap:2.2rem}
+  .method__rail{display:none}
+}
+@media (max-width:900px){
+  .hero{height:240vh}
+  .hero__bottom{display:none}
+  .nav__cta span{display:none}
+  .nav__cta::after{content:'AGENDAR'}
+  .stages-grid{grid-template-columns:1fr;gap:2rem}
+  .stages-title{position:relative;top:auto;max-width:none}
+  .stack-card{padding:1.4rem;margin-bottom:6vh}
+  .stack-card__viz{aspect-ratio:5/3}
+  .stack-card[data-step="01"]{top:8vh}
+  .stack-card[data-step="02"]{top:10vh}
+  .stack-card[data-step="03"]{top:12vh}
+  .stack-card[data-step="04"]{top:14vh}
+  .orbit__layout{grid-template-columns:1fr;gap:2rem}
+  .orbit__head{text-align:center;align-items:center;max-width:none}
+  /* núcleo menor: com 132px ele cobria os satélites da órbita interna */
+  .orbit__core{width:clamp(92px,25%,124px)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:1.5rem .8rem}
+  .stat__num{font-size:clamp(1.15rem,5.4vw,1.9rem)}
+  .stat__lbl{font-size:.56rem;letter-spacing:.2em}
+  .form__grid{grid-template-columns:1fr}
+  .viz-gauge{flex-direction:column;gap:1rem}
+}
+@media (max-width:560px){
+  .method__grid{grid-template-columns:1fr}
+  .cards-grid{grid-template-columns:1fr}
+  .hero__actions{flex-direction:column;align-items:stretch}
+  .hero__actions a{justify-content:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}
+}
+</style>
+</head>
+<body class="is-loading">
+
+<!-- ═══════════════════════════ AMBIENTE ═══════════════════════════ -->
+<div class="amb" aria-hidden="true"></div>
+<div class="amb-grid" aria-hidden="true"></div>
+<div class="amb-noise" aria-hidden="true"></div>
+
+<!-- ═══════════════════════════ CURSOR ═══════════════════════════ -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- ═══════════════════════════ LOADER ═══════════════════════════ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__word"><span>P</span><span>A</span><span>U</span><span>L</span><span>A</span><span>N</span><span>I</span></div>
+  <div class="loader__tag">Soluções Empresariais</div>
+  <div class="loader__line"></div>
+</div>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav class="nav" id="nav">
+  <a class="nav__logo" href="#hero" aria-label="PAULANI Soluções Empresariais">
+    <img src="./assets/logo-white.webp" width="590" height="120" alt="PAULANI Soluções Empresariais" />
+  </a>
+  <a class="nav__cta" href="#cta" aria-label="Agendar diagnóstico estratégico"><span>Agendar diagnóstico</span></a>
+</nav>
+<div class="progress" id="progress"></div>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__sticky">
+    <canvas class="hero__canvas" id="heroCanvas"></canvas>
+
+    <div class="hero__content">
+      <div class="hero__phase" id="heroPhase">
+        <h1 class="hero__title">Gestão inteligente para empresas que querem <em>crescer.</em></h1>
+        <p class="hero__sub">Transformamos desafios em estratégia, processos em eficiência e informações em decisões que impulsionam resultados.</p>
+        <div class="hero__actions">
+          <a class="btn-primary" href="#cta">Agendar diagnóstico estratégico
+            <svg viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M1 7h15M11 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn-ghost" href="#pilares">Conhecer nossas soluções</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__bottom">
+      <div class="hero__bottom-cell"><strong>+50</strong><span>Processos padronizados</span></div>
+      <div class="scroll-cue">scroll</div>
+      <div class="hero__bottom-cell" style="text-align:right;align-items:flex-end"><strong>04</strong><span>Pilares integrados</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ZOOM REVEAL ═══════════════════════════ -->
+<div class="zoom-reveal" id="zoomReveal">
+
+<!-- ─────────── DORES ─────────── -->
+<section class="section" id="desafios">
+  <div class="float-words" aria-hidden="true">
+    <span class="float-word">Falta de informação</span>
+    <span class="float-word">Processos desorganizados</span>
+    <span class="float-word">Excesso de operacional</span>
+    <span class="float-word">Baixa integração</span>
+    <span class="float-word">Sem indicadores</span>
+    <span class="float-word">Sem tempo pra estratégia</span>
+  </div>
+  <div class="section__inner" style="position:relative;z-index:2">
+    <p class="manifesto__big">O empresário deixa de <s>liderar o crescimento</s><br/>e passa a <em>administrar problemas.</em></p>
+    <p class="manifesto__lede">À medida que a empresa evolui, aumentam também as exigências da gestão: falta de informações para decidir, processos desorganizados, excesso de atividades operacionais, baixa integração entre áreas, dificuldade em acompanhar indicadores e pouco tempo para pensar estrategicamente.</p>
+    <p class="manifesto__close">É nesse momento que a PAULANI atua</p>
+  </div>
+</section>
+
+<!-- ─────────── MÉTODO ─────────── -->
+<section class="section" id="metodo">
+  <div class="section__inner">
+    <div class="section__head reveal">
+      <h2 class="section__title">Toda empresa tem uma <em>realidade diferente.</em></h2>
+      <p class="section__sub">Por isso desenvolvemos uma metodologia que acompanha cada etapa da evolução do negócio.</p>
+    </div>
+
+    <div class="method__grid" id="methodGrid">
+      <div class="method__rail" aria-hidden="true"></div>
+
+      <article class="step">
+        <div class="step__dot">01</div>
+        <h3 class="step__name">Diagnosticar</h3>
+        <p class="step__text">Compreendemos a realidade da empresa e identificamos oportunidades de melhoria.</p>
+      </article>
+
+      <article class="step">
+        <div class="step__dot">02</div>
+        <h3 class="step__name">Estruturar</h3>
+        <p class="step__text">Organizamos processos, responsabilidades, controles e informações.</p>
+      </article>
+
+      <article class="step">
+        <div class="step__dot">03</div>
+        <h3 class="step__name">Operar</h3>
+        <p class="step__text">Executamos rotinas administrativas por meio do nosso BackOffice Empresarial.</p>
+      </article>
+
+      <article class="step">
+        <div class="step__dot">04</div>
+        <h3 class="step__name">Evoluir</h3>
+        <p class="step__text">Utilizamos tecnologia, indicadores e direção estratégica para apoiar o crescimento sustentável.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 4 PILARES ─────────── -->
+<section class="section stages-section" id="pilares">
+  <div class="section__inner stages-grid">
+    <div class="stages-title reveal">
+      <h2 class="section__title">Soluções integradas<br/>para cada fase da <em>gestão.</em></h2>
+      <p class="section__sub">Quatro pilares que funcionam juntos: organizar o negócio, executar a operação, modernizar processos e decidir com informação confiável.</p>
+    </div>
+
+    <div class="stack-cards">
+
+      <!-- 01 ESTRATÉGIA & GESTÃO -->
+      <article class="stack-card" data-step="01">
+        <div class="stack-card__copy">
+          <div class="stack-card__num">01</div>
+          <h3 class="stack-card__title">Estratégia &amp; <em>Gestão</em></h3>
+          <p class="stack-card__lead">Organizamos empresas para que possam crescer de forma estruturada.</p>
+          <p class="stack-card__text">Apoiamos empresários na definição de estratégias, melhoria de processos e fortalecimento da gestão.</p>
+          <ul class="stack-card__list">
+            <li>Diagnóstico Empresarial</li><li>Consultoria Empresarial</li><li>Planejamento Estratégico</li><li>Estruturação de Processos</li><li>Governança</li><li>Gestão da Mudança</li><li>Mentoria Empresarial</li>
+          </ul>
+        </div>
+        <div class="stack-card__viz" aria-hidden="true">
+          <div class="viz-gauge">
+            <div class="viz-gauge__dial"></div>
+            <div class="viz-gauge__legend">
+              <div><i></i>Estruturado</div>
+              <div><i></i>Em organização</div>
+              <div><i></i>Oportunidade</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 BACKOFFICE -->
+      <article class="stack-card" data-step="02">
+        <div class="stack-card__copy">
+          <div class="stack-card__num">02</div>
+          <h3 class="stack-card__title">BackOffice <em>Empresarial</em></h3>
+          <p class="stack-card__lead">Executamos processos para você ter mais tempo para liderar o seu negócio.</p>
+          <p class="stack-card__text">Terceirizamos rotinas administrativas de forma modular, proporcionando organização, eficiência e controle operacional.</p>
+          <ul class="stack-card__list">
+            <li>BPO Financeiro</li><li>BPO Contábil</li><li>BPO Folha</li><li>BPO Compras</li><li>BPO Administrativo</li>
+          </ul>
+        </div>
+        <div class="stack-card__viz" aria-hidden="true">
+          <div class="viz-mods">
+            <div>BPO Financeiro</div>
+            <div>BPO Contábil</div>
+            <div>BPO Folha</div>
+            <div>BPO Compras</div>
+            <div>BPO Administrativo</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 TECNOLOGIA -->
+      <article class="stack-card" data-step="03">
+        <div class="stack-card__copy">
+          <div class="stack-card__num">03</div>
+          <h3 class="stack-card__title">Tecnologia &amp; <em>Automação</em></h3>
+          <p class="stack-card__lead">Simplificamos processos por meio da tecnologia.</p>
+          <p class="stack-card__text">Implantamos soluções que aumentam produtividade, reduzem retrabalho e conectam informações.</p>
+          <ul class="stack-card__list">
+            <li>Inteligência Artificial</li><li>Automação de Processos</li><li>Implantação de ERP</li><li>Conta Azul</li><li>Omie</li><li>Integrações entre Sistemas</li>
+          </ul>
+        </div>
+        <div class="stack-card__viz" aria-hidden="true">
+          <div class="viz-net">
+            <svg viewBox="0 0 320 130" preserveAspectRatio="xMidYMid meet">
+              <line class="net-link" x1="160" y1="65" x2="45" y2="26"/>
+              <line class="net-link" x1="160" y1="65" x2="45" y2="104"/>
+              <line class="net-link" x1="160" y1="65" x2="275" y2="26"/>
+              <line class="net-link" x1="160" y1="65" x2="275" y2="104"/>
+              <line class="net-link" x1="160" y1="65" x2="160" y2="14"/>
+              <line class="net-link" x1="160" y1="65" x2="160" y2="116"/>
+              <circle class="net-node" cx="45" cy="26" r="9"/>
+              <circle class="net-node" cx="45" cy="104" r="9"/>
+              <circle class="net-node" cx="275" cy="26" r="9"/>
+              <circle class="net-node" cx="275" cy="104" r="9"/>
+              <circle class="net-node" cx="160" cy="14" r="7"/>
+              <circle class="net-node" cx="160" cy="116" r="7"/>
+              <circle class="net-pulse" cx="45" cy="26" r="4"/>
+              <circle class="net-pulse" cx="275" cy="104" r="4" style="animation-delay:.8s"/>
+              <circle class="net-pulse" cx="160" cy="14" r="4" style="animation-delay:1.6s"/>
+              <circle class="net-node" cx="160" cy="65" r="17"/>
+              <circle class="net-core" cx="160" cy="65" r="6"/>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 DIREÇÃO FINANCEIRA -->
+      <article class="stack-card" data-step="04">
+        <div class="stack-card__copy">
+          <div class="stack-card__num">04</div>
+          <h3 class="stack-card__title">Direção Financeira <em>Estratégica</em></h3>
+          <p class="stack-card__lead">Transformamos informações em decisões estratégicas.</p>
+          <p class="stack-card__text">Atuamos ao lado da diretoria apoiando o crescimento da empresa por meio de análises, indicadores e planejamento financeiro.</p>
+          <ul class="stack-card__list">
+            <li>CFO as a Service</li><li>Controladoria Estratégica</li><li>Planejamento Financeiro</li><li>Planejamento Orçamentário</li><li>KPIs</li><li>BI Executivo</li><li>Dashboards Executivos</li><li>Gestão de Performance</li><li>Reuniões Estratégicas</li>
+          </ul>
+        </div>
+        <div class="stack-card__viz" aria-hidden="true">
+          <div class="viz-dash">
+            <div><span>Indicadores</span><div class="viz-dash__spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div><span>Margem</span><span>Acompanhada</span></div>
+            <div><span>Orçamento</span><span>Em controle</span></div>
+            <div><span>Decisão</span><span>Com dado</span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+</div><!-- /zoom-reveal -->
+
+<!-- ═══════════════════════════ MARQUEE ═══════════════════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Consultoria Empresarial</span><span>BPO Financeiro</span><span>BPO Contábil</span><span>Automação de Processos</span><span>CFO as a Service</span><span>BI Executivo</span><span>Planejamento Estratégico</span>
+    <span>Consultoria Empresarial</span><span>BPO Financeiro</span><span>BPO Contábil</span><span>Automação de Processos</span><span>CFO as a Service</span><span>BI Executivo</span><span>Planejamento Estratégico</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ ÓRBITA ═══════════════════════════ -->
+<section class="orbit section reveal" id="parceiro">
+  <div class="section__inner">
+    <div class="orbit__layout">
+      <div class="orbit__head reveal">
+        <h2 class="section__title">Um único parceiro.<br/><em>Todas as soluções para o seu negócio.</em></h2>
+        <p class="section__sub">Na PAULANI, você encontra mais do que uma empresa de serviços. Encontra um parceiro estratégico que integra consultoria, backoffice, tecnologia e direção financeira para fortalecer a gestão, aumentar a eficiência e impulsionar o crescimento sustentável da sua empresa.</p>
+        <p class="section__sub">Da estratégia à execução, da tecnologia à tomada de decisão, reunimos diferentes especialidades em um único lugar para simplificar a gestão e acelerar resultados.</p>
+      </div>
+
+      <div class="orbit__stage">
+        <div class="orbit__svg-wrap">
+          <svg class="orbit__svg" viewBox="0 0 900 560" role="img" aria-label="PAULANI ao centro com os quatro pilares e as ferramentas de tecnologia orbitando">
+            <defs>
+              <path id="orbitOuter" d="M110,280 A340,180 0 1,1 790,280 A340,180 0 1,1 110,280" />
+              <path id="orbitInner" d="M240,280 A210,116 0 1,1 660,280 A210,116 0 1,1 240,280" />
+            </defs>
+
+            <use href="#orbitOuter" class="orbit__path orbit__path--outer"/>
+            <use href="#orbitInner" class="orbit__path"/>
+
+            <!-- 4 pilares na órbita externa -->
+            <g>
+              <circle r="30" class="sat__bg"/>
+              <text class="sat__ico" y="5">01</text>
+              <text class="sat__lbl" y="52">ESTRATÉGIA</text>
+              <animateMotion dur="48s" repeatCount="indefinite" rotate="0"><mpath href="#orbitOuter"/></animateMotion>
+            </g>
+            <g>
+              <circle r="30" class="sat__bg"/>
+              <text class="sat__ico" y="5">02</text>
+              <text class="sat__lbl" y="52">BACKOFFICE</text>
+              <animateMotion dur="48s" begin="-12s" repeatCount="indefinite" rotate="0"><mpath href="#orbitOuter"/></animateMotion>
+            </g>
+            <g>
+              <circle r="30" class="sat__bg"/>
+              <text class="sat__ico" y="5">03</text>
+              <text class="sat__lbl" y="52">TECNOLOGIA</text>
+              <animateMotion dur="48s" begin="-24s" repeatCount="indefinite" rotate="0"><mpath href="#orbitOuter"/></animateMotion>
+            </g>
+            <g>
+              <circle r="30" class="sat__bg"/>
+              <text class="sat__ico" y="5">04</text>
+              <text class="sat__lbl" y="52">DIREÇÃO</text>
+              <animateMotion dur="48s" begin="-36s" repeatCount="indefinite" rotate="0"><mpath href="#orbitOuter"/></animateMotion>
+            </g>
+
+            <!-- ferramentas na órbita interna, sentido contrário -->
+            <g>
+              <circle r="17" class="tool__bg"/>
+              <text class="tool__lbl" y="3">ERP</text>
+              <animateMotion dur="34s" repeatCount="indefinite" rotate="0" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#orbitInner"/></animateMotion>
+            </g>
+            <g>
+              <circle r="17" class="tool__bg"/>
+              <text class="tool__lbl" y="3">BI</text>
+              <animateMotion dur="34s" begin="-8.5s" repeatCount="indefinite" rotate="0" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#orbitInner"/></animateMotion>
+            </g>
+            <g>
+              <circle r="17" class="tool__bg"/>
+              <text class="tool__lbl" y="3">IA</text>
+              <animateMotion dur="34s" begin="-17s" repeatCount="indefinite" rotate="0" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#orbitInner"/></animateMotion>
+            </g>
+            <g>
+              <circle r="17" class="tool__bg"/>
+              <text class="tool__lbl" y="3">OMIE</text>
+              <animateMotion dur="34s" begin="-25.5s" repeatCount="indefinite" rotate="0" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#orbitInner"/></animateMotion>
+            </g>
+          </svg>
+
+          <div class="orbit__core">
+            <img src="./assets/logo-white.webp" width="590" height="120" alt="PAULANI" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats reveal">
+      <div class="stat"><div class="stat__num">+<span data-count="50">0</span></div><div class="stat__lbl">Processos<br/>padronizados</div></div>
+      <div class="stat"><div class="stat__num"><span data-count="4">0</span></div><div class="stat__lbl">Pilares<br/>integrados</div></div>
+      <div class="stat"><div class="stat__num">PME</div><div class="stat__lbl">Pequenas e<br/>médias empresas</div></div>
+      <div class="stat"><div class="stat__num">Contínuo</div><div class="stat__lbl">Acompanhamento<br/>em todas as fases</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ VALOR + PARA QUEM ═══════════════════════════ -->
+<section class="section" id="valor">
+  <div class="section__inner">
+    <div class="section__head center reveal">
+      <h2 class="section__title">Como a PAULANI <em>gera valor.</em></h2>
+      <p class="section__sub">Mais do que executar processos, nossa atuação integra quatro dimensões essenciais para o crescimento empresarial.</p>
+    </div>
+
+    <div class="cards-grid reveal">
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>Estratégia</h3>
+        <p>Planejamento, organização e direcionamento do negócio.</p>
+      </article>
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="18" cy="18" r="2.5"/></svg></div>
+        <h3>Operação</h3>
+        <p>Execução eficiente das rotinas administrativas.</p>
+      </article>
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 2v4M14 2v4M10 18v4M14 18v4M2 10h4M2 14h4M18 10h4M18 14h4"/></svg></div>
+        <h3>Tecnologia</h3>
+        <p>Automação, integração e inteligência aplicada à gestão.</p>
+      </article>
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20V8"/></svg></div>
+        <h3>Performance</h3>
+        <p>Análise de resultados e apoio à tomada de decisões.</p>
+      </article>
+    </div>
+
+    <div class="section__head center reveal" style="margin-top:clamp(4rem,9vh,6rem)">
+      <h2 class="section__title">Por que escolher<br/>a <em>PAULANI.</em></h2>
+    </div>
+
+    <div class="cards-grid reveal">
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.2 7l3.5 2M16.3 15l3.5 2M4.2 17l3.5-2M16.3 9l3.5-2"/></svg></div>
+        <h3>Gestão Integrada</h3>
+        <p>Diversas soluções reunidas em um único parceiro.</p>
+      </article>
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M17 4.5a3.2 3.2 0 0 1 0 6M21 20v-2a4 4 0 0 0-3-3.8"/></svg></div>
+        <h3>Atendimento Consultivo</h3>
+        <p>Cada empresa possui necessidades diferentes. Desenvolvemos soluções sob medida.</p>
+      </article>
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.9 4.6 4.6 1.9-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.9zM18.5 15l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></svg></div>
+        <h3>Tecnologia Aplicada</h3>
+        <p>Automação, Inteligência Artificial e sistemas modernos para aumentar produtividade.</p>
+      </article>
+      <article class="card">
+        <div class="card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.7"/></svg></div>
+        <h3>Evolução Contínua</h3>
+        <p>Acompanhamos sua empresa em todas as fases do crescimento.</p>
+      </article>
+    </div>
+
+    <div class="section__head center reveal" style="margin-top:clamp(4rem,9vh,6rem);margin-bottom:0">
+      <h2 class="section__title" style="font-size:clamp(1.4rem,2.8vw,2.4rem)">Para quem é a PAULANI</h2>
+      <p class="section__sub">Atendemos empresas que desejam profissionalizar sua gestão.</p>
+      <div class="chips" style="justify-content:center">
+        <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MANIFESTO ═══════════════════════════ -->
+<section class="section" id="manifesto">
+  <div class="section__inner">
+    <div class="creed reveal">
+      <h2>Acreditamos que empresas bem geridas <em>transformam mercados.</em></h2>
+      <p>Acreditamos que o crescimento sustentável depende de organização, planejamento e decisões baseadas em informações confiáveis.</p>
+      <p>Acreditamos que tecnologia deve simplificar a gestão e que processos bem estruturados liberam tempo para o empresário fazer o que realmente importa: desenvolver o seu negócio.</p>
+      <p>Foi com esse propósito que nasceu a PAULANI.</p>
+      <div class="chips">
+        <span>Integrar soluções</span><span>Fortalecer empresas</span><span>Impulsionar resultados</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CTA + FORM ═══════════════════════════ -->
+<section class="cta reveal" id="cta">
+  <h2>Vamos construir a <em>próxima etapa</em> do seu negócio?</h2>
+  <p>Descubra como uma gestão integrada pode transformar a realidade da sua empresa.</p>
+
+  <form class="form" id="leadForm" novalidate>
+    <div class="form__head">
+      <h3>Agendar diagnóstico estratégico</h3>
+      <p>Preencha os dados abaixo. Retornamos com uma conversa inicial sobre a realidade da sua empresa.</p>
+    </div>
+    <div class="form__grid">
+      <div class="form__fld full"><label for="f-nome">Nome completo</label><input id="f-nome" name="nome" type="text" required autocomplete="name" placeholder="Ex.: Juliana Alves"/></div>
+      <div class="form__fld"><label for="f-tel">DDD + telefone</label><input id="f-tel" name="telefone" type="tel" required placeholder="(00) 00000-0000" inputmode="tel"/></div>
+      <div class="form__fld"><label for="f-email">E-mail corporativo</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="voce@empresa.com.br"/></div>
+      <div class="form__fld"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" type="text" required placeholder="Nome do negócio"/></div>
+      <div class="form__fld"><label for="f-setor">Setor</label>
+        <select id="f-setor" name="setor" required>
+          <option value="" disabled selected>Selecione</option>
+          <option>Indústria</option><option>Comércio</option><option>Distribuidora</option>
+          <option>Transportadora</option><option>Prestador de serviços</option><option>Outro</option>
+        </select>
+      </div>
+      <div class="form__fld full"><label for="f-porte">Número de colaboradores</label>
+        <select id="f-porte" name="porte" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="1-10">Até 10</option>
+          <option value="11-50">11 a 50</option>
+          <option value="51-200">51 a 200</option>
+          <option value="+200">Mais de 200</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="form__submit">Quero agendar o diagnóstico</button>
+    <div class="form__thanks">
+      <h4>Solicitação recebida.</h4>
+      <p>A PAULANI entra em contato para agendar o seu diagnóstico estratégico.</p>
+    </div>
+    <p class="form__note">Gestão integrada para empresas que querem crescer</p>
+  </form>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="footer">
+  <img class="footer__logo" src="./assets/logo-white.webp" width="590" height="120" alt="PAULANI Soluções Empresariais" loading="lazy" />
+  <nav class="footer__nav">
+    <a href="#desafios">Sobre</a>
+    <a href="#pilares">Soluções</a>
+    <a href="#metodo">Metodologia</a>
+    <a href="#cta">Contato</a>
+  </nav>
+  <div class="footer__contact">
+    <a href="mailto:contato@paulani.com.br">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 6.5l9 6 9-6"/></svg>
+      contato@paulani.com.br
+    </a>
+  </div>
+  <p class="footer__base">
+    © 2026 PAULANI Soluções Empresariais. Todos os direitos reservados.<br/>
+    <span>Gestão integrada para empresas que querem crescer.</span>
+  </p>
+</footer>
+
+<script src="./assets/js/lenis.min.js" defer></script>
+<script>
+/* ═══════════════════════════ SMOOTH SCROLL ═══════════════════════════ */
+let lenis=null;
+function initLenis(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const touch=matchMedia('(pointer:coarse)').matches;
+  if(reduce||touch||typeof Lenis==='undefined') return;
+  lenis=new Lenis({duration:1.15, lerp:0.085, smoothWheel:true, wheelMultiplier:1, touchMultiplier:1.6});
+  (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })();
+}
+addEventListener('load', initLenis);
+
+/* ═══════════════════════════ CURSOR ═══════════════════════════ */
+(function(){
+  if (matchMedia('(pointer:coarse)').matches) return;
+  const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+  let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my, dx=mx, dy=my;
+  addEventListener('mousemove', e=>{mx=e.clientX;my=e.clientY},{passive:true});
+  (function loop(){
+    dx+=(mx-dx)*.45; dy+=(my-dy)*.45;
+    rx+=(mx-rx)*.14; ry+=(my-ry)*.14;
+    dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,input,select,[data-hover]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('is-active'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('is-active'));
+  });
+})();
+
+/* ═══════════════════════════ LOADER ═══════════════════════════ */
+(function(){
+  const loader=document.getElementById('loader');
+  const finish=()=>{loader?.classList.add('is-done'); document.body.classList.remove('is-loading')};
+  setTimeout(finish, 2200);
+  addEventListener('load', ()=>setTimeout(finish, 2200));
+})();
+
+/* ═══════════════════════════ HERO FRAME SEQUENCE ═══════════════════════════ */
+(function(){
+  const FRAMES=61;
+  const canvas=document.getElementById('heroCanvas');
+  const ctx=canvas.getContext('2d');
+  const hero=document.getElementById('hero');
+  const heroPhase=document.getElementById('heroPhase');
+  const images=[];
+  let firstReady=false, currentIdx=0;
+
+  function drawFrame(idx){
+    const img=images[idx];
+    if(!img||!img.complete||!img.naturalWidth) return;
+    const cw=innerWidth, ch=innerHeight;
+    const ir=img.naturalWidth/img.naturalHeight, cr=cw/ch;
+    let dw,dh,dx,dy;
+    if(ir>cr){dh=ch; dw=ch*ir; dx=(cw-dw)/2; dy=0}
+    else {dw=cw; dh=cw/ir; dx=0; dy=(ch-dh)/2}
+    ctx.clearRect(0,0,cw,ch);
+    ctx.drawImage(img,dx,dy,dw,dh);
+  }
+  function resizeCanvas(){
+    const dpr=Math.min(2, devicePixelRatio||1);
+    canvas.width=innerWidth*dpr; canvas.height=innerHeight*dpr;
+    canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    drawFrame(currentIdx);
+  }
+
+  // 10 primeiros frames entram no caminho critico; o resto so depois do load,
+  // pra nao disputar banda com fontes e LCP.
+  const EAGER=10;
+  function loadFrame(i){
+    const img=images[i-1] || new Image();
+    const id=String(i).padStart(3,'0');
+    if(i>EAGER) img.fetchPriority='low';
+    img.onload=()=>{ if(!firstReady){firstReady=true; resizeCanvas()} };
+    img.src=`./assets/frames/f-${id}.jpg`;
+    images[i-1]=img;
+    return img;
+  }
+  for(let i=1;i<=FRAMES;i++) images.push(new Image());
+  for(let i=1;i<=EAGER;i++) loadFrame(i);
+  addEventListener('load', ()=>{
+    const rest=()=>{ for(let i=EAGER+1;i<=FRAMES;i++) loadFrame(i); };
+    'requestIdleCallback' in window ? requestIdleCallback(rest,{timeout:2500}) : setTimeout(rest,600);
+  });
+
+  const FRAME_END=0.75;
+  const easeInOut=t=>t<.5? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
+  const zoomReveal=document.getElementById('zoomReveal');
+  const reduceMo=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let heroTop=0, heroSpan=0;
+  function measureHero(){
+    heroTop=hero.offsetTop;
+    heroSpan=hero.offsetHeight - innerHeight;
+  }
+  function targetProgress(){
+    return heroSpan>0 ? Math.max(0, Math.min(1, (scrollY-heroTop)/heroSpan)) : 0;
+  }
+  measureHero();
+  let renderP=targetProgress(), lastZoomInset=-1;
+
+  function render(){
+    const target=targetProgress();
+    if(reduceMo){ renderP=target; }
+    else { renderP += (target-renderP)*0.14; if(Math.abs(target-renderP)<0.0004) renderP=target; }
+    const p=renderP;
+
+    const frameP=Math.min(1, p/FRAME_END);
+    const idx=Math.min(FRAMES-1, Math.round(frameP*(FRAMES-1)));
+    if(idx!==currentIdx){currentIdx=idx; drawFrame(idx)}
+
+    if(heroPhase){heroPhase.classList.toggle('is-out', frameP>0.6)}
+
+    if(zoomReveal){
+      const zoomP=Math.max(0, Math.min(1, (p-FRAME_END)/(1-FRAME_END)));
+      const inset=+(50*(1-easeInOut(zoomP))).toFixed(2);
+      if(inset!==lastZoomInset){lastZoomInset=inset; zoomReveal.style.clipPath=`inset(${inset}% ${inset}% ${inset}% ${inset}%)`}
+    }
+    requestAnimationFrame(render);
+  }
+  addEventListener('resize', ()=>{measureHero(); resizeCanvas()});
+  resizeCanvas();
+  requestAnimationFrame(render);
+})();
+
+/* ═══════════════════════════ NAV + PROGRESS ═══════════════════════════ */
+(function(){
+  const nav=document.getElementById('nav'), prog=document.getElementById('progress');
+  function tick(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    const p=max>0?scrollY/max:0;
+    prog.style.transform=`scaleX(${Math.max(0,Math.min(1,p))})`;
+    nav.classList.toggle('is-scrolled', scrollY>60);
+  }
+  let t=false;
+  addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{tick();t=false}); t=true}},{passive:true});
+  tick();
+})();
+
+/* ═══════════════════════════ REVEAL ═══════════════════════════ */
+(function(){
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('is-visible'); obs.unobserve(e.target)} });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal, #methodGrid').forEach(el=>obs.observe(el));
+})();
+
+/* ═══════════════════════════ COUNT-UP ═══════════════════════════ */
+(function(){
+  const easeOut=t=>1-Math.pow(1-t,3);
+  function animate(el){
+    const target=parseInt(el.dataset.count,10);
+    const dur=1800, start=performance.now();
+    (function tick(now){
+      const t=Math.min(1,(now-start)/dur);
+      el.textContent=Math.round(target*easeOut(t)).toLocaleString('pt-BR');
+      if(t<1) requestAnimationFrame(tick);
+    })(performance.now());
+  }
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){animate(e.target); obs.unobserve(e.target)} });
+  },{threshold:.4});
+  document.querySelectorAll('[data-count]').forEach(el=>obs.observe(el));
+})();
+
+/* ═══════════════════════════ FORM ═══════════════════════════ */
+(function(){
+  const f=document.getElementById('leadForm');
+  if(!f) return;
+  const tel=f.querySelector('#f-tel');
+  tel?.addEventListener('input',e=>{
+    let v=e.target.value.replace(/\D/g,'').slice(0,11);
+    if(v.length>2) v=`(${v.slice(0,2)}) ${v.slice(2)}`;
+    if(v.length>10) v=v.replace(/(\(\d{2}\) \d{5})(\d)/, '$1-$2');
+    else if(v.length>9) v=v.replace(/(\(\d{2}\) \d{4})(\d)/, '$1-$2');
+    e.target.value=v;
+  });
+  f.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!f.checkValidity()){f.reportValidity(); return}
+    // TODO: plugar destino real (SMTP / CRM / WhatsApp) — ver COPY-FONTE-DA-VERDADE.md, pendência 5
+    f.classList.add('is-sent');
+  });
+})();
+
+/* ═══════════════════════════ ÂNCORAS ═══════════════════════════ */
+(function(){
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href').slice(1);
+      if(!id) return;
+      const t=document.getElementById(id);
+      if(!t) return;
+      e.preventDefault();
+      if(lenis){ lenis.scrollTo(t, {offset:-10, duration:1.2}); }
+      else { t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
