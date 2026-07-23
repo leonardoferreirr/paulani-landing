@@ -24,7 +24,6 @@ assets/
     syncopate-700.woff2       12 KB
     syncopate-400.woff2       22 KB
     inter.woff2               25 KB — variável, eixo wght limitado a 300-700
-  frames/f-001..061.jpg       sequência do hero, 1,9 MB
   js/lenis.min.js             auto-hospedado, sem CDN
 ```
 
@@ -64,7 +63,7 @@ Fontes servidas localmente e subsetadas aos glifos da página. Zero request exte
 ## Os movimentos
 
 1. **Loader** — as 7 letras de PAULANI entram escalonadas, o "I" acende em azul, barra de 2px corre embaixo. Some em 2,2s.
-2. **Hero** — 61 JPGs desenhados num `<canvas>` sticky dentro de um container de 400vh. O índice do frame segue um **lerp de 0.14**, não o scroll direto: sem isso o clique da roda do mouse vira stop-motion.
+2. **Hero** — cena de dados viva renderizada ao vivo num `<canvas>` sticky (grade em perspectiva correndo, nós de dados pulsando, poeira). Movimento contínuo próprio em loop temporal, **não amarrado ao scroll** (foi a troca que resolveu o "meio lento": antes eram 61 JPGs de 1,9 MB presos ao scroll, que arrastavam atrás do dedo). O scroll controla só o fade do texto e o zoom-reveal. Fundo estático pré-renderizado num offscreen e blitado; glows dos nós usam um sprite, não gradiente por frame. Canvas a DPR 1.5 e contagem de partículas enxuta: 60fps travado. Pausa via IntersectionObserver quando o hero sai de vista. Container de 220vh (200vh no mobile).
 3. **Zoom-reveal** — a seção seguinte tem `margin-top:-100vh` e `clip-path:inset(50%)` abrindo pra 0 nos últimos 25% do hero. O conteúdo cresce do centro da tela por cima do frame congelado.
 4. **Método** — 4 etapas com um trilho que preenche e os marcadores acendendo em cascata (450ms entre cada).
 5. **Sticky stack** — título parado à esquerda, 4 pilares empilhando à direita com `top` crescendo 3vh por card. Cada card tem um visual funcional em CSS puro: medidor de maturidade, módulos acendendo, nós integrados, dashboard.
@@ -92,7 +91,7 @@ npx lighthouse <url> --form-factor=mobile --throttling-method=devtools --screenE
 Regras que sustentam o número:
 - CSS inline, zero folha externa
 - fontes subsetadas, `font-display:optional`, preload das duas críticas
-- 10 primeiros frames no caminho crítico; os outros 51 só depois do `load`, via `requestIdleCallback`
+- hero em canvas ao vivo, zero asset de imagem no caminho crítico
 - Lenis auto-hospedado com `defer`
 
 ## Pendências
@@ -101,11 +100,7 @@ Ver a tabela no fim de `COPY-FONTE-DA-VERDADE.md`. As que bloqueiam campanha:
 
 1. **Telefone/WhatsApp** — o briefing traz `(xx) xxxx-xxxx` como placeholder. Hoje o rodapé só tem e-mail.
 2. **Destino do form** — o `submit` só troca de estado visual, tem um `// TODO` marcando o ponto.
-3. **Vídeo do hero** — os 61 frames atuais são um placeholder abstrato gerado. Para trocar:
-   ```bash
-   ffmpeg -i video.mp4 -vf "fps=61/DURACAO,scale=1600:-1" -q:v 4 assets/frames/f-%03d.jpg
-   ```
-   Manter exatamente 61 arquivos, ou ajustar a constante `FRAMES` no script.
+3. **Fundo do hero** — hoje é a cena de dados abstrata (canvas ao vivo). Se o cliente quiser trocar por imagem/vídeo real, o `<canvas id="heroCanvas">` vira o alvo (ou troca por `<video autoplay muted loop playsinline>` no mesmo lugar). O texto e o zoom-reveal continuam funcionando por cima.
 4. **Página de obrigado + pixel** — não existe ainda. Sem isso não há mensuração de campanha.
 
 ## Não testado

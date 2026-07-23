@@ -15,7 +15,6 @@
 <link rel="apple-touch-icon" href="./assets/favicon.png" />
 <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/syncopate-700.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/inter.woff2" crossorigin />
-<link rel="preload" as="image" href="./assets/frames/f-001.jpg" fetchpriority="high" />
 
 <style>
 /* ════════════════════════════════════════════════════════════════════════
@@ -194,7 +193,7 @@ ul{list-style:none}
 /* ════════════════════════════════════════════════════════════════════════
    HERO
 ════════════════════════════════════════════════════════════════════════ */
-.hero{position:relative;width:100%;height:400vh;z-index:2}
+.hero{position:relative;width:100%;height:220vh;z-index:2}
 .hero__sticky{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;isolation:isolate}
 .hero__canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:.9}
 .hero__sticky::before{
@@ -592,13 +591,18 @@ ul{list-style:none}
 /* ════════════════════════════════════════════════════════════════════════
    CTA + FORM
 ════════════════════════════════════════════════════════════════════════ */
-.cta{text-align:center;padding:clamp(5rem,12vh,9rem) 1.2rem;background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(46,155,255,.09),transparent 70%)}
-.cta h2{font-family:var(--font-h);font-weight:700;font-size:clamp(1.7rem,4vw,3.5rem);line-height:1.02;letter-spacing:-1.2px;text-transform:uppercase;max-width:22ch;margin:0 auto}
+.cta{padding:clamp(5rem,12vh,9rem) clamp(1.2rem,4vw,3rem);background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(46,155,255,.09),transparent 70%)}
+.cta__layout{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.cta__head{display:flex;flex-direction:column;gap:1.3rem;max-width:520px}
+.cta h2{font-family:var(--font-h);font-weight:700;font-size:clamp(1.7rem,3.6vw,3.2rem);line-height:1.04;letter-spacing:-1.2px;text-transform:uppercase;max-width:16ch}
 .cta h2 em{font-style:normal;padding-block:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone;background:linear-gradient(135deg,var(--blue-glow),#a9d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.cta > p{margin:1.4rem auto 2.4rem;max-width:56ch;color:var(--bone-soft);font-size:1.05rem}
+.cta__head p{max-width:48ch;color:var(--bone-soft);font-size:1.05rem;line-height:1.65}
+.cta__assure{display:flex;flex-direction:column;gap:.7rem;margin-top:.4rem}
+.cta__assure li{display:flex;align-items:center;gap:.7rem;font-size:.9rem;color:var(--bone-soft)}
+.cta__assure svg{width:18px;height:18px;flex:none;color:var(--blue-glow)}
 
 .form{
-  max-width:760px;margin:3rem auto 0;padding:clamp(2rem,4vw,3rem);
+  max-width:none;margin:0;padding:clamp(1.6rem,3vw,2.4rem);
   background:linear-gradient(180deg,rgba(19,28,46,.85),rgba(6,11,21,.95));
   border:1px solid var(--line-blue);border-radius:var(--r-lg);
   backdrop-filter:blur(8px);text-align:left;
@@ -654,7 +658,7 @@ ul{list-style:none}
   .method__rail{display:none}
 }
 @media (max-width:900px){
-  .hero{height:240vh}
+  .hero{height:200vh}
   .hero__bottom{display:none}
   .nav__cta span{display:none}
   .nav__cta::after{content:'AGENDAR'}
@@ -668,6 +672,10 @@ ul{list-style:none}
   .stack-card[data-step="04"]{top:14vh}
   .orbit__layout{grid-template-columns:1fr;gap:2rem}
   .orbit__head{text-align:center;align-items:center;max-width:none}
+  .cta__layout{grid-template-columns:1fr;gap:2.4rem}
+  .cta__head{text-align:center;align-items:center;max-width:none;margin:0 auto}
+  .cta h2{max-width:none}
+  .cta__assure{align-items:flex-start;text-align:left;max-width:340px;margin:0 auto}
   /* núcleo menor: com 132px ele cobria os satélites da órbita interna */
   .orbit__core{width:clamp(92px,25%,124px)}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -1100,8 +1108,16 @@ ul{list-style:none}
 
 <!-- ═══════════════════════════ CTA + FORM ═══════════════════════════ -->
 <section class="cta reveal" id="cta">
-  <h2>Vamos construir a <em>próxima etapa</em> do seu negócio?</h2>
-  <p>Descubra como uma gestão integrada pode transformar a realidade da sua empresa.</p>
+  <div class="section__inner cta__layout">
+    <div class="cta__head">
+      <h2>Vamos construir a <em>próxima etapa</em> do seu negócio?</h2>
+      <p>Descubra como uma gestão integrada pode transformar a realidade da sua empresa.</p>
+      <ul class="cta__assure">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.7"/></svg>Diagnóstico estratégico da sua gestão</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.7"/></svg>Atendimento consultivo, sob medida</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.7"/></svg>Um único parceiro para todas as áreas</li>
+      </ul>
+    </div>
 
   <form class="form" id="leadForm" novalidate>
     <div class="form__head">
@@ -1137,6 +1153,7 @@ ul{list-style:none}
     </div>
     <p class="form__note">Gestão integrada para empresas que querem crescer</p>
   </form>
+  </div>
 </section>
 
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
@@ -1200,92 +1217,148 @@ addEventListener('load', initLenis);
   addEventListener('load', ()=>setTimeout(finish, 2200));
 })();
 
-/* ═══════════════════════════ HERO FRAME SEQUENCE ═══════════════════════════ */
+/* ═══════════════════════════ HERO — CENA DE DADOS VIVA (LOOP) ═══════════════════════════
+   Grade em perspectiva + nós de dados + poeira, renderizada ao vivo em canvas.
+   Movimento contínuo próprio (não amarrado ao scroll). O scroll controla só o
+   fade do texto e o zoom-reveal. Custo baixo: fundo estático pré-renderizado num
+   offscreen, e os glows dos nós usam um sprite em vez de gradiente por frame. */
 (function(){
-  const FRAMES=61;
   const canvas=document.getElementById('heroCanvas');
   const ctx=canvas.getContext('2d');
   const hero=document.getElementById('hero');
   const heroPhase=document.getElementById('heroPhase');
-  const images=[];
-  let firstReady=false, currentIdx=0;
-
-  function drawFrame(idx){
-    const img=images[idx];
-    if(!img||!img.complete||!img.naturalWidth) return;
-    const cw=innerWidth, ch=innerHeight;
-    const ir=img.naturalWidth/img.naturalHeight, cr=cw/ch;
-    let dw,dh,dx,dy;
-    if(ir>cr){dh=ch; dw=ch*ir; dx=(cw-dw)/2; dy=0}
-    else {dw=cw; dh=cw/ir; dx=0; dy=(ch-dh)/2}
-    ctx.clearRect(0,0,cw,ch);
-    ctx.drawImage(img,dx,dy,dw,dh);
-  }
-  function resizeCanvas(){
-    const dpr=Math.min(2, devicePixelRatio||1);
-    canvas.width=innerWidth*dpr; canvas.height=innerHeight*dpr;
-    canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    drawFrame(currentIdx);
-  }
-
-  // 10 primeiros frames entram no caminho critico; o resto so depois do load,
-  // pra nao disputar banda com fontes e LCP.
-  const EAGER=10;
-  function loadFrame(i){
-    const img=images[i-1] || new Image();
-    const id=String(i).padStart(3,'0');
-    if(i>EAGER) img.fetchPriority='low';
-    img.onload=()=>{ if(!firstReady){firstReady=true; resizeCanvas()} };
-    img.src=`./assets/frames/f-${id}.jpg`;
-    images[i-1]=img;
-    return img;
-  }
-  for(let i=1;i<=FRAMES;i++) images.push(new Image());
-  for(let i=1;i<=EAGER;i++) loadFrame(i);
-  addEventListener('load', ()=>{
-    const rest=()=>{ for(let i=EAGER+1;i<=FRAMES;i++) loadFrame(i); };
-    'requestIdleCallback' in window ? requestIdleCallback(rest,{timeout:2500}) : setTimeout(rest,600);
-  });
-
-  const FRAME_END=0.75;
-  const easeInOut=t=>t<.5? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
   const zoomReveal=document.getElementById('zoomReveal');
   const reduceMo=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile=matchMedia('(max-width:900px)').matches;
+  const easeInOut=t=>t<.5? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
+
+  let W=0,H=0,DPR=1,HORIZON=0;
+  const bg=document.createElement('canvas'), bgx=bg.getContext('2d');
+  const glow=(function(){
+    const s=64,c=document.createElement('canvas');c.width=c.height=s;
+    const g=c.getContext('2d'),rg=g.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+    rg.addColorStop(0,'rgba(150,200,255,1)');rg.addColorStop(.4,'rgba(120,180,255,.5)');rg.addColorStop(1,'rgba(120,180,255,0)');
+    g.fillStyle=rg;g.fillRect(0,0,s,s);return c;
+  })();
+
+  // PRNG determinístico
+  let seed=20260723; const rnd=()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296;};
+  const NN=mobile?24:44, ND=mobile?32:60;
+  const nodes=[],dust=[];
+  for(let i=0;i<NN;i++) nodes.push({gx:rnd()*2-0.5,gz:rnd(),r:1+rnd()*2.2,ph:rnd()*6.28});
+  for(let i=0;i<ND;i++) dust.push({x:rnd(),y:rnd(),r:.4+rnd()*1.5,a:.1+rnd()*.5,sp:.15+rnd()*.7});
+
+  function proj(gx,gz){
+    const d=0.045+gz*gz*1.9;
+    const y=HORIZON+(H-HORIZON)*d/(d+0.55);
+    const s=(y-HORIZON)/(H-HORIZON);
+    return [W/2+(gx-0.5)*W*(0.35+s*3.4), y, s];
+  }
+  function renderBG(){
+    bg.width=W*DPR;bg.height=H*DPR;bgx.setTransform(DPR,0,0,DPR,0,0);
+    let g=bgx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#050A14');g.addColorStop(.42,'#081326');g.addColorStop(.52,'#0A1B36');g.addColorStop(1,'#060B15');
+    bgx.fillStyle=g;bgx.fillRect(0,0,W,H);
+    g=bgx.createRadialGradient(W/2,HORIZON,0,W/2,HORIZON,W*0.55);
+    g.addColorStop(0,'rgba(46,155,255,0.30)');g.addColorStop(.35,'rgba(46,155,255,0.10)');g.addColorStop(1,'rgba(46,155,255,0)');
+    bgx.fillStyle=g;bgx.fillRect(0,0,W,H);
+    g=bgx.createRadialGradient(W*0.14,H*0.22,0,W*0.14,H*0.22,W*0.34);
+    g.addColorStop(0,'rgba(5,31,81,0.85)');g.addColorStop(1,'rgba(5,31,81,0)');
+    bgx.fillStyle=g;bgx.fillRect(0,0,W,H);
+    // linhas de fuga (estáticas — vão no fundo)
+    for(let i=-9;i<=9;i++){
+      const gx=0.5+i*0.115;
+      const [x1,y1]=proj(gx,0.001),[x2,y2]=proj(gx,1);
+      const gr=bgx.createLinearGradient(x1,y1,x2,y2);
+      gr.addColorStop(0,'rgba(120,175,255,0.02)');gr.addColorStop(1,'rgba(120,175,255,0.14)');
+      bgx.strokeStyle=gr;bgx.lineWidth=1;bgx.beginPath();bgx.moveTo(x1,y1);bgx.lineTo(x2,y2);bgx.stroke();
+    }
+    // linha do horizonte
+    const hg=bgx.createLinearGradient(0,0,W,0);
+    hg.addColorStop(0,'rgba(46,155,255,0)');hg.addColorStop(.5,'rgba(120,195,255,0.5)');hg.addColorStop(1,'rgba(46,155,255,0)');
+    bgx.fillStyle=hg;bgx.fillRect(0,HORIZON-0.5,W,1.2);
+    // vinheta
+    g=bgx.createRadialGradient(W/2,H*0.5,H*0.25,W/2,H*0.5,W*0.72);
+    g.addColorStop(0,'rgba(6,11,21,0)');g.addColorStop(1,'rgba(6,11,21,0.9)');
+    bgx.fillStyle=g;bgx.fillRect(0,0,W,H);
+  }
+  function draw(t){
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.clearRect(0,0,W,H);
+    ctx.drawImage(bg,0,0,W,H);
+    const drift=(t*0.045)%1;
+    // linhas transversais (correm em direção ao observador)
+    ctx.lineWidth=1;
+    for(let i=0;i<26;i++){
+      const gz=((i/26)+drift)%1;
+      const [,y,s]=proj(0.5,gz);
+      if(y<=HORIZON+1) continue;
+      ctx.strokeStyle=`rgba(120,175,255,${(0.03+s*0.16).toFixed(3)})`;
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    }
+    // nós de dados
+    for(const n of nodes){
+      const gz=(n.gz+drift)%1;
+      const [px,py,s]=proj(n.gx,gz);
+      if(py<=HORIZON+2||px<-60||px>W+60) continue;
+      const pulse=0.6+0.4*Math.sin(n.ph+t*2);
+      const r=n.r*(0.35+s*2.4), al=Math.min(1,n.r*0.42*s*pulse), gr=r*7;
+      ctx.globalAlpha=al*0.9; ctx.drawImage(glow,px-gr,py-gr,gr*2,gr*2);
+      ctx.globalAlpha=Math.min(1,al*1.5); ctx.fillStyle='#dceeff';
+      ctx.beginPath();ctx.arc(px,py,r,0,6.283);ctx.fill();
+    }
+    // poeira suspensa
+    ctx.fillStyle='#aacdff';
+    for(const d of dust){
+      const py=((d.y - t*d.sp*0.03)%1+1)%1, px=((d.x + t*d.sp*0.008)%1+1)%1;
+      ctx.globalAlpha=d.a*0.5;
+      ctx.fillRect(px*W, py*H*0.62, d.r*1.5, d.r*1.5);
+    }
+    ctx.globalAlpha=1;
+  }
+  function resize(){
+    DPR=Math.min(1.5,devicePixelRatio||1);   // fundo abstrato: 1.5 basta e corta o custo de fill
+    W=innerWidth;H=innerHeight;HORIZON=H*0.46;
+    canvas.width=W*DPR;canvas.height=H*DPR;
+    canvas.style.width=W+'px';canvas.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    renderBG();
+  }
 
   let heroTop=0, heroSpan=0;
-  function measureHero(){
-    heroTop=hero.offsetTop;
-    heroSpan=hero.offsetHeight - innerHeight;
-  }
-  function targetProgress(){
-    return heroSpan>0 ? Math.max(0, Math.min(1, (scrollY-heroTop)/heroSpan)) : 0;
-  }
-  measureHero();
-  let renderP=targetProgress(), lastZoomInset=-1;
+  function measureHero(){ heroTop=hero.offsetTop; heroSpan=hero.offsetHeight - innerHeight; }
+  function targetProgress(){ return heroSpan>0 ? Math.max(0, Math.min(1, (scrollY-heroTop)/heroSpan)) : 0; }
 
-  function render(){
-    const target=targetProgress();
-    if(reduceMo){ renderP=target; }
-    else { renderP += (target-renderP)*0.14; if(Math.abs(target-renderP)<0.0004) renderP=target; }
-    const p=renderP;
-
-    const frameP=Math.min(1, p/FRAME_END);
-    const idx=Math.min(FRAMES-1, Math.round(frameP*(FRAMES-1)));
-    if(idx!==currentIdx){currentIdx=idx; drawFrame(idx)}
-
-    if(heroPhase){heroPhase.classList.toggle('is-out', frameP>0.6)}
-
+  const HOLD_END=0.5;                 // até aqui o texto fica; depois começa o zoom
+  let lastInset=-1;
+  function applyScroll(){
+    const p=targetProgress();
+    if(heroPhase) heroPhase.classList.toggle('is-out', p>0.42);
     if(zoomReveal){
-      const zoomP=Math.max(0, Math.min(1, (p-FRAME_END)/(1-FRAME_END)));
-      const inset=+(50*(1-easeInOut(zoomP))).toFixed(2);
-      if(inset!==lastZoomInset){lastZoomInset=inset; zoomReveal.style.clipPath=`inset(${inset}% ${inset}% ${inset}% ${inset}%)`}
+      const zp=Math.max(0, Math.min(1, (p-HOLD_END)/(1-HOLD_END)));
+      const inset=+(50*(1-easeInOut(zp))).toFixed(2);
+      if(inset!==lastInset){lastInset=inset; zoomReveal.style.clipPath=`inset(${inset}% ${inset}% ${inset}% ${inset}%)`;}
     }
-    requestAnimationFrame(render);
   }
-  addEventListener('resize', ()=>{measureHero(); resizeCanvas()});
-  resizeCanvas();
-  requestAnimationFrame(render);
+
+  // pausa a cena quando o hero sai de vista (bateria + main-thread)
+  let running=false, rafId=0;
+  function loop(now){ draw(now/1000); applyScroll(); rafId=requestAnimationFrame(loop); }
+  function start(){ if(running||reduceMo) return; running=true; rafId=requestAnimationFrame(loop); }
+  function stop(){ running=false; cancelAnimationFrame(rafId); }
+
+  addEventListener('resize', ()=>{measureHero(); resize();});
+  measureHero(); resize();
+
+  if(reduceMo){
+    draw(2.2);                        // um quadro estático com a cena montada
+    if(zoomReveal) zoomReveal.style.clipPath='inset(0)';   // conteúdo sempre visível
+    addEventListener('scroll', ()=>{ if(zoomReveal) zoomReveal.style.clipPath='inset(0)'; }, {passive:true});
+  } else {
+    new IntersectionObserver((es)=>{ es[0].isIntersecting ? start() : stop(); },{threshold:0})
+      .observe(hero);
+    start();
+  }
 })();
 
 /* ═══════════════════════════ NAV + PROGRESS ═══════════════════════════ */
