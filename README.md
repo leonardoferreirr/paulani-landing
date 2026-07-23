@@ -62,7 +62,7 @@ Fontes servidas localmente e subsetadas aos glifos da página. Zero request exte
 
 ## Os movimentos
 
-1. **Loader** — as 7 letras de PAULANI entram escalonadas, o "I" acende em azul, barra de 2px corre embaixo. Some em 2,2s.
+1. **Loader** — a logo oficial (SVG inline do wordmark, arquivo do cliente) se **desenha**: os contornos riscam em azul via `stroke-dasharray` com `pathLength="1"` (normaliza os 30 paths pra desenharem em sincronia), depois o preenchimento branco inunda e o traço some. Barra de 2px corre embaixo. Some em 2,2s. Fonte do SVG: `Logo.svg` do cliente, otimizado com svgo (73KB → 7KB, paths preservados separados).
 2. **Hero** — cena de dados viva renderizada ao vivo num `<canvas>` sticky (grade em perspectiva correndo, nós de dados pulsando, poeira). Movimento contínuo próprio em loop temporal, **não amarrado ao scroll** (foi a troca que resolveu o "meio lento": antes eram 61 JPGs de 1,9 MB presos ao scroll, que arrastavam atrás do dedo). O scroll controla só o fade do texto e o zoom-reveal. Fundo estático pré-renderizado num offscreen e blitado; glows dos nós usam um sprite, não gradiente por frame. Canvas a DPR 1.5 e contagem de partículas enxuta: 60fps travado. Pausa via IntersectionObserver quando o hero sai de vista. Container de 220vh (200vh no mobile).
 3. **Zoom-reveal** — a seção seguinte tem `margin-top:-100vh` e `clip-path:inset(50%)` abrindo pra 0 nos últimos 25% do hero. O conteúdo cresce do centro da tela por cima do frame congelado.
 4. **Método** — 4 etapas com um trilho que preenche e os marcadores acendendo em cascata (450ms entre cada).
