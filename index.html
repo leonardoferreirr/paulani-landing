@@ -201,11 +201,13 @@ ul{list-style:none}
 }
 .hero__title{
   font-family:var(--font-h);font-weight:700;
-  font-size:clamp(2.2rem,6.6vw,7rem);
+  font-size:clamp(2.2rem,6vw,6.5rem);
   line-height:.94;letter-spacing:-2px;text-transform:uppercase;color:var(--bone);
-  text-shadow:0 4px 40px rgba(0,0,0,.6);max-width:16ch;
+  text-shadow:0 4px 40px rgba(0,0,0,.6);max-width:none;
 }
-.hero__title .ttl-br{display:none}   /* desktop: quebra natural; mobile força 3 linhas */
+/* Desktop: Gestão inteligente / para empresas que / querem crescer (br-d quebra em "que")
+   Mobile: Gestão inteligente / para empresas / que querem crescer (br-m quebra em "empresas") */
+.hero__title .br-m{display:none}
 .hero__title em{
   font-style:normal;padding-block:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone;
   background:linear-gradient(135deg,var(--blue-glow) 0%,#a9d9ff 100%);
@@ -214,7 +216,7 @@ ul{list-style:none}
 }
 .hero__sub{
   font-family:var(--font-b);font-size:clamp(.95rem,1.3vw,1.18rem);
-  color:var(--bone-soft);max-width:58ch;line-height:1.6;margin-top:1.5rem;font-weight:300;
+  color:var(--bone-soft);max-width:58ch;line-height:1.6;margin:1.5rem auto 0;font-weight:300;
 }
 .hero__actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-top:2.2rem}
 .hero__bottom{
@@ -493,6 +495,7 @@ ul{list-style:none}
 .orbit__layout{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2rem,5vw,5rem);align-items:center;margin-bottom:clamp(3rem,6vh,5rem)}
 .orbit__head{display:flex;flex-direction:column;gap:1.2rem;text-align:left;align-items:flex-start;max-width:560px}
 .orbit__head .section__title{font-size:clamp(1.7rem,3.4vw,2.9rem)}
+.orbit__head .obr{display:none}
 .orbit__stage{position:relative;width:100%;aspect-ratio:900/560;display:grid;place-items:center}
 .orbit__svg-wrap{position:relative;width:100%;height:100%;filter:drop-shadow(0 0 50px rgba(46,155,255,.22))}
 .orbit__svg{width:100%;height:100%;display:block;overflow:visible}
@@ -667,7 +670,8 @@ ul{list-style:none}
 @media (max-width:900px){
   .hero{height:170vh}
   .hero__title{font-size:clamp(1.25rem,5.5vw,3rem);letter-spacing:-1.2px;line-height:1;max-width:none}
-  .hero__title .ttl-br{display:block}
+  .hero__title .br-m{display:inline}
+  .hero__title .br-d{display:none}
   .hero__sub{font-size:1rem;max-width:42ch}
   .hero__actions{margin-top:1.8rem}
   /* mostra só a seta de scroll centralizada, pra não deixar vão embaixo */
@@ -728,7 +732,10 @@ ul{list-style:none}
   .cards-grid .card:nth-child(3){top:20vh}
   .cards-grid .card:nth-child(4){top:22.5vh;margin-bottom:0}
 
-  /* ÓRBITA: maior no mobile (bleed lateral + labels em unidades maiores do viewBox) */
+  /* ÓRBITA: título em 3 linhas (fonte menor), depois o gráfico maior */
+  .orbit__head .section__title{font-size:clamp(1.2rem,5.2vw,2.9rem);letter-spacing:-1px;line-height:1.08}
+  .orbit__head .obr{display:block}
+  /* maior no mobile (bleed lateral + labels em unidades maiores do viewBox) */
   .orbit__stage{width:118%;margin-left:-9%}
   .sat__lbl{font-size:15px}
   .sat__ico{font-size:17px}
@@ -782,7 +789,7 @@ ul{list-style:none}
 
     <div class="hero__content">
       <div class="hero__phase" id="heroPhase">
-        <h1 class="hero__title">Gestão inteligente<br class="ttl-br"/> para empresas<br class="ttl-br"/> <em>que querem crescer.</em></h1>
+        <h1 class="hero__title">Gestão inteligente<br/> para empresas<br class="br-m"/> <em>que<br class="br-d"/> querem crescer.</em></h1>
         <p class="hero__sub">Transformamos desafios em estratégia, processos em eficiência e informações em decisões que impulsionam resultados.</p>
         <div class="hero__actions">
           <a class="btn-primary" href="#cta">Agendar diagnóstico estratégico
@@ -991,8 +998,8 @@ ul{list-style:none}
   <div class="section__inner">
     <div class="orbit__layout">
       <div class="orbit__head reveal">
-        <h2 class="section__title">Um único parceiro.<br/><em>Todas as soluções para o seu negócio.</em></h2>
-        <p class="section__sub">Na PAULANI, você encontra mais do que uma empresa de serviços. Encontra um parceiro estratégico que integra consultoria, backoffice, tecnologia e direção financeira para fortalecer a gestão, aumentar a eficiência e impulsionar o crescimento sustentável da sua empresa.</p>
+        <h2 class="section__title">Um único parceiro.<br/><em>Todas as soluções<br class="obr"/> para o seu negócio.</em></h2>
+        <p class="section__sub">Na Paulani, você encontra mais do que uma empresa de serviços. Encontra um parceiro estratégico que integra consultoria, backoffice, tecnologia e direção financeira para fortalecer a gestão, aumentar a eficiência e impulsionar o crescimento sustentável da sua empresa.</p>
       </div>
 
       <div class="orbit__stage">
@@ -1159,7 +1166,7 @@ ul{list-style:none}
       <h2>Acreditamos que empresas bem geridas <em>transformam mercados.</em></h2>
       <p>Acreditamos que o crescimento sustentável depende de organização, planejamento e decisões baseadas em informações confiáveis.</p>
       <p>Acreditamos que tecnologia deve simplificar a gestão e que processos bem estruturados liberam tempo para o empresário fazer o que realmente importa: desenvolver o seu negócio.</p>
-      <p>Foi com esse propósito que nasceu a PAULANI.</p>
+      <p>Foi com esse propósito que nasceu a Paulani.</p>
       <div class="chips">
         <span>Integrar soluções</span><span>Fortalecer empresas</span><span>Impulsionar resultados</span>
       </div>
@@ -1210,7 +1217,7 @@ ul{list-style:none}
     <button type="submit" class="form__submit">Quero agendar o diagnóstico</button>
     <div class="form__thanks">
       <h4>Solicitação recebida.</h4>
-      <p>A PAULANI entra em contato para agendar o seu diagnóstico estratégico.</p>
+      <p>A Paulani entra em contato para agendar o seu diagnóstico estratégico.</p>
     </div>
     <p class="form__note">Gestão integrada para empresas que querem crescer</p>
   </form>
