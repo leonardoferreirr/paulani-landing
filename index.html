@@ -560,6 +560,25 @@ ul{list-style:none}
 }
 .chips span:hover{border-color:var(--line-blue);color:var(--bone)}
 
+/* Marquee de tags (Para quem é a PAULANI): linhas em sentidos alternados */
+.tags-mq{
+  margin-top:2rem;display:flex;flex-direction:column;gap:.7rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.tag-row{overflow:hidden}
+.tag-track{display:flex;gap:.6rem;width:max-content;animation:tagScroll 44s linear infinite reverse}
+.tag-row:nth-child(2) .tag-track{animation-duration:36s;animation-direction:normal;animation-delay:-8s}
+.tag-row:nth-child(3) .tag-track{animation-duration:40s;animation-direction:reverse;animation-delay:-16s}
+.tag-row:nth-child(3){display:none}   /* desktop: só 2 linhas */
+.tags-mq:hover .tag-track{animation-play-state:paused}
+.tag-track span{
+  white-space:nowrap;flex:none;
+  font-family:var(--font-h);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-soft);
+  padding:.6rem 1rem;border:1px solid var(--line);border-radius:var(--r-pill);background:rgba(255,255,255,.03);
+}
+@keyframes tagScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
 /* ════════════════════════════════════════════════════════════════════════
    MANIFESTO FINAL
 ════════════════════════════════════════════════════════════════════════ */
@@ -678,6 +697,45 @@ ul{list-style:none}
   .stat__lbl{font-size:.56rem;letter-spacing:.2em}
   .form__grid{grid-template-columns:1fr}
   .viz-gauge{flex-direction:column;gap:1rem}
+}
+@media (max-width:768px){
+  /* MÉTODO: roadmap vertical, número à esquerda e texto ao lado, trilho enche no scroll */
+  .method__grid{display:flex;flex-direction:column;gap:2rem;margin-top:0;position:relative}
+  .method__rail{
+    display:block;left:21px;right:auto;top:22px;bottom:22px;width:2px;height:auto;background:var(--line);
+  }
+  .method__rail::after{
+    width:100%;height:100%;transform:scaleY(0);transform-origin:top;
+    background:linear-gradient(180deg,var(--navy-mid),var(--blue-glow));
+    box-shadow:0 0 12px rgba(46,155,255,.6);transition:transform 2.2s var(--ease);
+  }
+  .method__grid.is-visible .method__rail::after{transform:scaleY(1)}
+  .step{display:grid;grid-template-columns:44px 1fr;column-gap:1.1rem;row-gap:.45rem;padding-top:0}
+  .step__dot{grid-column:1;grid-row:1 / span 2;align-self:start}
+  .step__name{grid-column:2;grid-row:1;align-self:center}
+  .step__text{grid-column:2;grid-row:2;max-width:none}
+
+  /* CARDS (valor + por que escolher): sticky stack subindo um sobre o outro */
+  .cards-grid{display:block;grid-template-columns:1fr;padding-bottom:6vh}
+  .cards-grid .card{
+    position:sticky;margin-bottom:3.5vh;
+    background:linear-gradient(180deg,#141d30,#0a111f);
+    box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 1px var(--line-blue);
+  }
+  .cards-grid .card:hover{transform:none}
+  .cards-grid .card:nth-child(1){top:15vh}
+  .cards-grid .card:nth-child(2){top:17.5vh}
+  .cards-grid .card:nth-child(3){top:20vh}
+  .cards-grid .card:nth-child(4){top:22.5vh;margin-bottom:0}
+
+  /* ÓRBITA: maior no mobile (bleed lateral + labels em unidades maiores do viewBox) */
+  .orbit__stage{width:118%;margin-left:-9%}
+  .sat__lbl{font-size:15px}
+  .sat__ico{font-size:17px}
+  .tool__lbl{font-size:12px}
+
+  /* Marquee de tags: 3ª linha visível no mobile */
+  .tag-row:nth-child(3){display:block}
 }
 @media (max-width:560px){
   .method__grid{grid-template-columns:1fr}
@@ -935,7 +993,6 @@ ul{list-style:none}
       <div class="orbit__head reveal">
         <h2 class="section__title">Um único parceiro.<br/><em>Todas as soluções para o seu negócio.</em></h2>
         <p class="section__sub">Na PAULANI, você encontra mais do que uma empresa de serviços. Encontra um parceiro estratégico que integra consultoria, backoffice, tecnologia e direção financeira para fortalecer a gestão, aumentar a eficiência e impulsionar o crescimento sustentável da sua empresa.</p>
-        <p class="section__sub">Da estratégia à execução, da tecnologia à tomada de decisão, reunimos diferentes especialidades em um único lugar para simplificar a gestão e acelerar resultados.</p>
       </div>
 
       <div class="orbit__stage">
@@ -1077,9 +1134,20 @@ ul{list-style:none}
     <div class="section__head center reveal" style="margin-top:clamp(4rem,9vh,6rem);margin-bottom:0">
       <h2 class="section__title" style="font-size:clamp(1.4rem,2.8vw,2.4rem)">Para quem é a PAULANI</h2>
       <p class="section__sub">Atendemos empresas que desejam profissionalizar sua gestão.</p>
-      <div class="chips" style="justify-content:center">
+    </div>
+    <div class="tags-mq reveal" role="group" aria-label="Segmentos atendidos: pequenas empresas, médias empresas, empresas familiares, indústrias, transportadoras, prestadores de serviços, comércio, distribuidoras">
+      <div class="tag-row"><div class="tag-track" aria-hidden="true">
         <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
-      </div>
+        <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
+      </div></div>
+      <div class="tag-row"><div class="tag-track" aria-hidden="true">
+        <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
+        <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
+      </div></div>
+      <div class="tag-row"><div class="tag-track" aria-hidden="true">
+        <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
+        <span>Pequenas Empresas</span><span>Médias Empresas</span><span>Empresas Familiares</span><span>Indústrias</span><span>Transportadoras</span><span>Prestadores de Serviços</span><span>Comércio</span><span>Distribuidoras</span>
+      </div></div>
     </div>
   </div>
 </section>
